@@ -96,52 +96,40 @@ def turn_side_ext(side1: str, s11, s12, s13: int, side2: str, s21, s22, s23: int
 # front
 def move_front_clock():
     turn_side('front', 'clock', 1)
-    turn_side_ext('top', 6, 7, 8,
-                  'right', 0, 3, 6,
-                  'bottom', 0, 1, 2,
-                  'left', 2, 5, 8)
+    turn_side_ext('top', 6, 7, 8, 'right', 0, 3, 6,
+                  'bottom', 0, 1, 2, 'left', 2, 5, 8)
 
 
 def move_front_unclock():
     turn_side('front', 'unclock', 1)
-    turn_side_ext('top', 6, 7, 8,
-                  'left', 8, 5, 2,
-                  'bottom', 2, 1, 0,
-                  'right', 0, 3, 6)
+    turn_side_ext('top', 6, 7, 8, 'left', 8, 5, 2,
+                  'bottom', 2, 1, 0, 'right', 0, 3, 6)
 
 
 # back
 def move_back_clock():
     turn_side('back', 'clock', 1)
-    turn_side_ext('top', 0, 1, 2,
-                  'left', 6, 3, 0,
-                  'bottom', 8, 7, 6,
-                  'right', 2, 5, 8)
+    turn_side_ext('top', 0, 1, 2, 'left', 6, 3, 0,
+                  'bottom', 8, 7, 6, 'right', 2, 5, 8)
 
 
 def move_back_unclock():
     turn_side('back', 'unclock', 1)
-    turn_side_ext('top', 0, 1, 2,
-                  'right', 2, 5, 8,
-                  'bottom', 8, 7, 6,
-                  'left', 6, 3, 0)
+    turn_side_ext('top', 0, 1, 2, 'right', 2, 5, 8,
+                  'bottom', 8, 7, 6, 'left', 6, 3, 0)
 
 
 # left
 def move_left_clock():
     turn_side('left', 'clock', 1)
-    turn_side_ext('top', 0, 3, 6,
-                  'front', 0, 3, 6,
-                  'bottom', 0, 3, 6,
-                  'back', 8, 5, 2)
+    turn_side_ext('top', 0, 3, 6, 'front', 0, 3, 6,
+                  'bottom', 0, 3, 6, 'back', 8, 5, 2)
 
 
 def move_left_unclock():
     turn_side('left', 'unclock', 1)
-    turn_side_ext('top', 0, 3, 6,
-                  'back', 8, 5, 2,
-                  'bottom', 0, 3, 6,
-                  'front', 0, 3, 6)
+    turn_side_ext('top', 0, 3, 6, 'back', 8, 5, 2,
+                  'bottom', 0, 3, 6, 'front', 0, 3, 6)
 
 
 # right
@@ -153,64 +141,44 @@ def move_right_clock():
 
 def move_right_unclock():
     turn_side('right', 'unclock', 1)
-    turn_side_ext('top', 2, 5, 8,
-                  'front', 2, 5, 8,
-                  'bottom', 2, 5, 8,
-                  'back', 6, 3, 0)
+    turn_side_ext('top', 2, 5, 8, 'front', 2, 5, 8,
+                  'bottom', 2, 5, 8, 'back', 6, 3, 0)
 
 
 # top
 def move_top_clock():
-    pass
-
-
-#    turn_side('front', 'clock', 1)
-#    turn_side_ext('top', 6, 7, 8,
-#                     'right', 0, 3, 6,
-#                     'bottom', 0, 1, 2,
-#                     'left', 2, 5, 8)
+    turn_side('top', 'clock', 1)
+    turn_side_ext('front', 0, 1, 2,                     'left', 0, 1, 2,
+                     'back', 0, 1, 2,                     'right', 0, 1, 2)
 
 
 def move_top_unclock():
-    pass
-
-
-#   turn_side('front', 'unclock', 1)
-#   turn_side_ext('top', 6, 7, 8,
-#                    'left', 8, 5, 2,
-#                    'bottom', 2, 1, 0,
-#                    'right', 0, 3, 6)
+   turn_side('top', 'unclock', 1)
+   turn_side_ext('front', 0, 1, 2,                    'right', 0, 1, 2,
+                    'back', 0, 1, 2,                    'left', 2, 1, 0)
 
 
 # down
 def move_down_clock():
-    pass
-
-
-#   turn_side('front', 'clock', 1)
-#   turn_side_ext('top', 6, 7, 8,
-#                    'right', 0, 3, 6,
-#                    'bottom', 0, 1, 2,
-#                    'left', 2, 5, 8)
+   turn_side('bottom', 'clock', 1)
+   turn_side_ext('front', 6, 7, 8,
+                    'right', 6, 7, 8,
+                    'back', 6, 7, 8,
+                    'left', 6, 7, 8)
 
 
 def move_down_unclock():
-    pass
-
-
-#   turn_side('front', 'unclock', 1)
-#   turn_side_ext('top', 6, 7, 8,
-##                    'left', 8, 5, 2,
-#                    'bottom', 2, 1, 0,
-#                    'right', 0, 3, 6)
+   turn_side('bottom', 'unclock', 1)
+   turn_side_ext('front', 6, 7, 8,
+                    'left', 6, 7, 8,
+                    'back', 6, 7, 8,
+                    'right', 6, 7, 8)
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print(vCube)
-
-    move_right_unclock()
-    move_right_clock()
+    move_down_unclock()
+    move_down_clock()
     print(vCube)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
