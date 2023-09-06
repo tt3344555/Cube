@@ -1,21 +1,22 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
-SideIndex = {'front': 0, 'back': 1, 'left': 2, 'right': 3, 'down': 4, 'up': 5}
-dTurn = ['clock', 'unclock']
-vCube = 'OOOOOOOOO.RRRRRRRRR.GGGGGGGGG.BBBBBBBBB.WWWWWWWWW.YYYYYYYYY.'
+#SideIndex = {'front': 'OOOOOOOOO', 'back': 'RRRRRRRRR', 'left': 'GGGGGGGGG', 'right': 'BBBBBBBBB', 'down': 'WWWWWWWWW', 'up': 'YYYYYYYYY'}
+#dTurn = ['clock', 'unclock']
+#vCube = 'OOOOOOOOO.RRRRRRRRR.GGGGGGGGG.BBBBBBBBB.WWWWWWWWW.YYYYYYYYY.'
+vCubeSide = {'front': 'OOOOOOOOO', 'back': 'RRRRRRRRR', 'left': 'GGGGGGGGG', 'right': 'BBBBBBBBB', 'down': 'WWWWWWWWW', 'up': 'YYYYYYYYY'}
 
 
 def check_solve() -> bool:
-    global vCube
-    res = vCube == 'OOOOOOOOO.RRRRRRRRR.GGGGGGGGG.BBBBBBBBB.WWWWWWWWW.YYYYYYYYY.'
+    global vCubeSide
+    res = vCubeSide == {'front': 'OOOOOOOOO', 'back': 'RRRRRRRRR', 'left': 'GGGGGGGGG', 'right': 'BBBBBBBBB', 'down': 'WWWWWWWWW', 'up': 'YYYYYYYYY'}
     return res
 
 
 def get_side(side: str) -> str:
-    global vCube
+    global vCubeSide
     if side in ('front', 'back', 'left', 'right', 'down', 'up'):
-        res = vCube[SideIndex[side] * 10:SideIndex[side] * 10 + 9]
+        res = vCubeSide[side]
         return res
     else:
         print('get_side: error: set side: front, back, left, right, down, top')
@@ -25,16 +26,13 @@ def get_side(side: str) -> str:
 def set_side(side: str, value: str):
     global vCube
     if side in ('front', 'back', 'left', 'right', 'down', 'up'):
-        if SideIndex[side] != 0:
-            vCube = vCube[0:SideIndex[side] * 10 - 1] + '.' + value + '.' + vCube[SideIndex[side] * 10 + 10:len(vCube)]
-        else:
-            vCube = value + '.' + vCube[10:len(vCube)]
+        vCubeSide[side] = value
     else:
         print('set_side: error: set side: front, back, left, right, down, top')
         exit(1)
 
 
-def turn_side(side: str, turn: dTurn, count: int):
+def turn_side(side: str, turn: str, count: int):
     res = get_side(side)
     if turn == 'clock':
         for i in range(count):
@@ -185,13 +183,13 @@ def move_down_unclock():
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print(vCube)
+    print(vCubeSide)
     for i in range(6):
        move_back_clock()
        move_left_clock()
        move_back_unclock()
        move_left_unclock()
-    print(vCube)
+    print(vCubeSide)
     print(check_solve())
 
 a1 = '1'
@@ -199,4 +197,7 @@ a2 = '2'
 a3 = '3'
 a = (a1, a2, a3)
 print(a)
-
+aCube = ('A','A','A'),('B','B','B')
+#SideIndex['top'] = (6,'TTT')
+#print (SideIndex)
+#print (SideIndex['top'])
