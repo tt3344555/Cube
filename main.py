@@ -1,8 +1,6 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
-vCubeSide = {'front': 'OOOOOOOOO', 'back': 'RRRRRRRRR', 'left': 'GGGGGGGGG',
-             'right': 'BBBBBBBBB', 'down': 'WWWWWWWWW', 'up': 'YYYYYYYYY'}
 vCubeSideSet = {'front': ['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'],
                 'back': ['R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'],
                 'left': ['G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G'],
@@ -19,15 +17,14 @@ def check_solve() -> bool:
                            'right': ['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B'],
                            'down': ['W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W'],
                            'up': ['Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y']}
-    #    res = vCubeSide == {'front': 'OOOOOOOOO', 'back': 'RRRRRRRRR', 'left': 'GGGGGGGGG',
-    #                        'right': 'BBBBBBBBB', 'down': 'WWWWWWWWW', 'up': 'YYYYYYYYY'}
     return res
 
 
 def get_side(side: str) -> set():
     global vCubeSideSet
     if side in ('front', 'back', 'left', 'right', 'down', 'up'):
-        res = vCubeSide[side]
+        res = vCubeSideSet[side]
+#        print ('get_side: value', res)
         return res
     else:
         print('get_side: error: side value: front, back, left, right, down, top')
@@ -36,31 +33,34 @@ def get_side(side: str) -> set():
 
 def set_side(side: str, value: set()):
     global vCubeSideSet
+#    print ('set_side: value', value)
     if side in ('front', 'back', 'left', 'right', 'down', 'up'):
-        vCubeSide[side] = value
+        vCubeSideSet[side] = value
     else:
         print('set_side: error: side value: front, back, left, right, down, top')
         exit(1)
 
 
-def turn_side(side: set(), turn: str):
+def turn_side(side: str, turn: str):
     res = get_side(side)
     if turn == 'clock':
-        res = res[6] + res[3] + res[0] + res[7] + res[4] + res[1] + res[8] + res[5] + res[2]
+        res = [res[6], res[3], res[0], res[7], res[4], res[1], res[8], res[5], res[2]]
     elif turn == 'unclock':
-        res = res[2] + res[5] + res[8] + res[1] + res[4] + res[7] + res[0] + res[3] + res[6]
+        res = [res[2], res[5], res[8], res[1], res[4], res[7], res[0], res[3], res[6]]
     else:
         print('turn_side: error: turn value: clock, unclock')
         exit(1)
     set_side(side, res)
 
 
-def turn_side_ext(side1: str, s11, s12, s13: int, side2: str, s21, s22, s23: int,
+def turn_side_ext_old(side1: str, s11, s12, s13: int, side2: str, s21, s22, s23: int,
                   side3: str, s31, s32, s33: int, side4: str, s41, s42, s43: int):
-    vside1 = get_side(side1)
-    vside2 = get_side(side2)
-    vside3 = get_side(side3)
-    vside4 = get_side(side4)
+
+
+    vside1 = str(get_side(side1))
+    vside2 = str(get_side(side2))
+    vside3 = str(get_side(side3))
+    vside4 = str(get_side(side4))
 
     nside2 = ''
     for i in range(0, 9):
@@ -105,6 +105,43 @@ def turn_side_ext(side1: str, s11, s12, s13: int, side2: str, s21, s22, s23: int
             nside1 = nside1 + vside4[s43]
         else:
             nside1 = nside1 + vside1[i]
+
+    set_side(side1, nside1)
+    set_side(side2, nside2)
+    set_side(side3, nside3)
+    set_side(side4, nside4)
+
+def turn_side_ext(side1: str, s11, s12, s13: int, side2: str, s21, s22, s23: int,
+                  side3: str, s31, s32, s33: int, side4: str, s41, s42, s43: int):
+    vside1 = get_side(side1)
+    vside1str = vside1[0]+vside1[1]+vside1[2]+vside1[3]+vside1[4]+vside1[5]+vside1[6]+vside1[7]+vside1[8]
+    vside2 = get_side(side2)
+    vside2str = vside2[0]+vside2[1]+vside2[2]+vside2[3]+vside2[4]+vside2[5]+vside2[6]+vside2[7]+vside2[8]
+    vside3 = get_side(side3)
+    vside3str = vside3[0]+vside3[1]+vside3[2]+vside3[3]+vside3[4]+vside3[5]+vside3[6]+vside3[7]+vside3[8]
+    vside4 = get_side(side4)
+    vside4str = vside4[0]+vside4[1]+vside4[2]+vside4[3]+vside4[4]+vside4[5]+vside4[6]+vside4[7]+vside4[8]
+
+    nside1 = get_side(side1)
+    nside2 = get_side(side2)
+    nside3 = get_side(side3)
+    nside4 = get_side(side4)
+
+    nside2[s21] = vside1str[s11]
+    nside2[s22] = vside1str[s12]
+    nside2[s23] = vside1str[s13]
+
+    nside3[s31] = vside2str[s21]
+    nside3[s32] = vside2str[s22]
+    nside3[s33] = vside2str[s23]
+
+    nside4[s41] = vside3str[s31]
+    nside4[s42] = vside3str[s32]
+    nside4[s43] = vside3str[s33]
+
+    nside1[s11] = vside4str[s41]
+    nside1[s12] = vside4str[s42]
+    nside1[s13] = vside4str[s43]
 
     set_side(side1, nside1)
     set_side(side2, nside2)
@@ -193,12 +230,13 @@ def move_down_unclock():
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print(vCubeSideSet)
+#    for i in range(1,6):
     move_right_clock()
-    move_down_unclock()
-    move_right_clock()
-    move_down_unclock()
+#        move_up_clock()
+#        move_right_unclock()
+#        move_up_unclock()
     print(vCubeSideSet)
     print(check_solve())
-    print(vCubeSideSet)
-    vCubeSideSet['front'][0] = 'Z'
-    print(vCubeSideSet)
+#    print(vCubeSideSet)
+#    vCubeSideSet['front'][0] = 'Z'
+#    print(vCubeSideSet)
