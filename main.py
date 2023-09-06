@@ -42,11 +42,12 @@ def set_side(side: str, value: set()):
 
 
 def turn_side(side: str, turn: str):
-    res = get_side(side)
+    resside = get_side(side)
+    resstr = resside[0]+resside[1]+resside[2]+resside[3]+resside[4]+resside[5]+resside[6]+resside[7]+resside[8]
     if turn == 'clock':
-        res = [res[6], res[3], res[0], res[7], res[4], res[1], res[8], res[5], res[2]]
+        res = [resstr[6], resstr[3], resstr[0], resstr[7], resstr[4], resstr[1], resstr[8], resstr[5], resstr[2]]
     elif turn == 'unclock':
-        res = [res[2], res[5], res[8], res[1], res[4], res[7], res[0], res[3], res[6]]
+        res = [resstr[2], resstr[5], resstr[8], resstr[1], resstr[4], resstr[7], resstr[0], resstr[3], resstr[6]]
     else:
         print('turn_side: error: turn value: clock, unclock')
         exit(1)
@@ -230,11 +231,11 @@ def move_down_unclock():
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print(vCubeSideSet)
-#    for i in range(1,6):
-    move_right_clock()
-#        move_up_clock()
-#        move_right_unclock()
-#        move_up_unclock()
+    for i in range(1,7):
+        move_right_clock()
+        move_up_clock()
+        move_right_unclock()
+        move_up_unclock()
     print(vCubeSideSet)
     print(check_solve())
 #    print(vCubeSideSet)
