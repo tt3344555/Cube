@@ -31,6 +31,9 @@ def set_side(side: str, value: str):
         print('set_side: error: set side: front, back, left, right, down, top')
         exit(1)
 
+def side_to_str(side: set) -> str:
+    res = str(side[0]+side[1]+side[2]+side[3]+side[4]+side[5]+side[6]+side[7]+side[8])
+    return res
 
 def turn_side(side: str, turn: str, count: int):
     res = get_side(side)
@@ -53,54 +56,28 @@ def turn_side_ext(side1: str, s11, s12, s13: int, side2: str, s21, s22, s23: int
     vside3 = get_side(side3)
     vside4 = get_side(side4)
 
-    nside2 = ''
-    for i in range(0, 9):
-        if i == s21:
-            nside2 = nside2 + vside1[s11]
-        elif i == s22:
-            nside2 = nside2 + vside1[s12]
-        elif i == s23:
-            nside2 = nside2 + vside1[s13]
-        else:
-            nside2 = nside2 + vside2[i]
+    nside1 = list(vside1)
+    nside2 = list(vside2)
+    nside3 = list(vside3)
+    nside4 = list(vside4)
 
-    nside3 = ''
-    for i in range(0, 9):
-        if i == s31:
-            nside3 = nside3 + vside2[s21]
-        elif i == s32:
-            nside3 = nside3 + vside2[s22]
-        elif i == s33:
-            nside3 = nside3 + vside2[s23]
-        else:
-            nside3 = nside3 + vside3[i]
+    nside2[s21] = vside1[s11]
+    nside2[s22] = vside1[s12]
+    nside2[s23] = vside1[s13]
+    nside3[s31] = vside2[s21]
+    nside3[s32] = vside2[s22]
+    nside3[s33] = vside2[s23]
+    nside4[s41] = vside3[s31]
+    nside4[s42] = vside3[s32]
+    nside4[s43] = vside3[s33]
+    nside1[s11] = vside4[s41]
+    nside1[s12] = vside4[s42]
+    nside1[s13] = vside4[s43]
 
-    nside4 = ''
-    for i in range(0, 9):
-        if i == s41:
-            nside4 = nside4 + vside3[s31]
-        elif i == s42:
-            nside4 = nside4 + vside3[s32]
-        elif i == s43:
-            nside4 = nside4 + vside3[s33]
-        else:
-            nside4 = nside4 + vside4[i]
-
-    nside1 = ''
-    for i in range(0, 9):
-        if i == s11:
-            nside1 = nside1 + vside4[s41]
-        elif i == s12:
-            nside1 = nside1 + vside4[s42]
-        elif i == s13:
-            nside1 = nside1 + vside4[s43]
-        else:
-            nside1 = nside1 + vside1[i]
-
-    set_side(side1, nside1)
-    set_side(side2, nside2)
-    set_side(side3, nside3)
-    set_side(side4, nside4)
+    set_side(side1, side_to_str(nside1))
+    set_side(side2, side_to_str(nside2))
+    set_side(side3, side_to_str(nside3))
+    set_side(side4, side_to_str(nside4))
 
 
 # front
