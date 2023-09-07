@@ -31,7 +31,7 @@ def set_side(side: str, value: str):
         print('set_side: error: set side: front, back, left, right, down, top')
         exit(1)
 
-def side_to_str(side: set) -> str:
+def sideset_to_str(side: set) -> str:
     res = str(side[0]+side[1]+side[2]+side[3]+side[4]+side[5]+side[6]+side[7]+side[8])
     return res
 
@@ -74,10 +74,10 @@ def turn_side_ext(side1: str, s11, s12, s13: int, side2: str, s21, s22, s23: int
     nside1[s12] = vside4[s42]
     nside1[s13] = vside4[s43]
 
-    set_side(side1, side_to_str(nside1))
-    set_side(side2, side_to_str(nside2))
-    set_side(side3, side_to_str(nside3))
-    set_side(side4, side_to_str(nside4))
+    set_side(side1, sideset_to_str(nside1))
+    set_side(side2, sideset_to_str(nside2))
+    set_side(side3, sideset_to_str(nside3))
+    set_side(side4, sideset_to_str(nside4))
 
 
 # front
