@@ -32,21 +32,19 @@ def set_side(side: str, value: str):
         exit(1)
 
 
-def sideset_to_str(side: set) -> str:
+def sideset_to_str(side: list) -> str:
     res = str(side[0] + side[1] + side[2] + side[3] + side[4] + side[5] + side[6] + side[7] + side[8])
     return res
 
 
-def turn_side(side: str, turn: str, count: int):
+def turn_side(side: str, turn: str):
     res = get_side(side)
     if turn == 'clockwise':
-        for i in range(count):
-            res = res[6] + res[3] + res[0] + res[7] + res[4] + res[1] + res[8] + res[5] + res[2]
+        res = res[6] + res[3] + res[0] + res[7] + res[4] + res[1] + res[8] + res[5] + res[2]
     elif turn == 'counterclockwise':
-        for i in range(count):
-            res = res[2] + res[5] + res[8] + res[1] + res[4] + res[7] + res[0] + res[3] + res[6]
+        res = res[2] + res[5] + res[8] + res[1] + res[4] + res[7] + res[0] + res[3] + res[6]
     else:
-        print('turn_side: error: set turn: clock, unclock')
+        print('turn_side: error: set turn: clockwise, counterclockwise')
         exit(1)
     set_side(side, res)
 
@@ -84,78 +82,78 @@ def turn_side_ext(side1: str, s11, s12, s13: int, side2: str, s21, s22, s23: int
 
 # front
 def move_front_clockwise():
-    turn_side('front', 'clockwise', 1)
+    turn_side('front', 'clockwise')
     turn_side_ext('up', 6, 7, 8, 'right', 0, 3, 6,
                   'down', 2, 1, 0, 'left', 8, 5, 2)
 
 
 def move_front_counterclockwise():
-    turn_side('front', 'counterclockwise', 1)
+    turn_side('front', 'counterclockwise')
     turn_side_ext('up', 6, 7, 8, 'left', 8, 5, 2,
                   'down', 2, 1, 0, 'right', 0, 3, 6)
 
 
 # back
 def move_back_clockwise():
-    turn_side('back', 'clockwise', 1)
+    turn_side('back', 'clockwise')
     turn_side_ext('up', 0, 1, 2, 'left', 6, 3, 0,
                   'down', 8, 7, 6, 'right', 2, 5, 8)
 
 
 def move_back_counterclockwise():
-    turn_side('back', 'counterclockwise', 1)
+    turn_side('back', 'counterclockwise')
     turn_side_ext('up', 0, 1, 2, 'right', 2, 5, 8,
                   'down', 8, 7, 6, 'left', 6, 3, 0)
 
 
 # left
 def move_left_clockwise():
-    turn_side('left', 'clockwise', 1)
+    turn_side('left', 'clockwise')
     turn_side_ext('up', 0, 3, 6, 'front', 0, 3, 6,
                   'down', 0, 3, 6, 'back', 8, 5, 2)
 
 
 def move_left_counterclockwise():
-    turn_side('left', 'counterclockwise', 1)
+    turn_side('left', 'counterclockwise')
     turn_side_ext('up', 0, 3, 6, 'back', 8, 5, 2,
                   'down', 0, 3, 6, 'front', 0, 3, 6)
 
 
 # right
 def move_right_clockwise():
-    turn_side('right', 'clockwise', 1)
+    turn_side('right', 'clockwise')
     turn_side_ext('up', 2, 5, 8, 'back', 6, 3, 0,
                   'down', 2, 5, 8, 'front', 2, 5, 8)
 
 
 def move_right_counterclockwise():
-    turn_side('right', 'counterclockwise', 1)
+    turn_side('right', 'counterclockwise')
     turn_side_ext('up', 2, 5, 8, 'front', 2, 5, 8,
                   'down', 2, 5, 8, 'back', 6, 3, 0)
 
 
 # top
 def move_up_clockwise():
-    turn_side('up', 'clockwise', 1)
+    turn_side('up', 'clockwise')
     turn_side_ext('front', 0, 1, 2, 'left', 0, 1, 2,
                   'back', 0, 1, 2, 'right', 0, 1, 2)
 
 
 def move_up_counterclockwise():
-    turn_side('up', 'counterclockwise', 1)
+    turn_side('up', 'counterclockwise')
     turn_side_ext('front', 0, 1, 2, 'right', 0, 1, 2,
                   'back', 0, 1, 2, 'left', 0, 1, 2)
 
 
 # down
 def move_down_clockwise():
-    turn_side('down', 'clockwise', 1)
+    turn_side('down', 'clockwise')
     turn_side_ext('front', 6, 7, 8, 'right', 6, 7, 8,
                   'back', 6, 7, 8, 'left', 6, 7, 8)
 
 
 def move_down_counterclockwise():
-    turn_side('down', 'counterclockwise', 1)
+    turn_side('down', 'counterclockwise')
     turn_side_ext('front', 6, 7, 8, 'left', 6, 7, 8,
                   'back', 6, 7, 8, 'right', 6, 7, 8)
 
@@ -170,3 +168,7 @@ if __name__ == '__main__':
         move_left_counterclockwise()
     print(vCubeSide)
     print(check_solve())
+
+    a = ['a', 'b', 'c', 'd']
+
+print(a.__getitem__(0))
