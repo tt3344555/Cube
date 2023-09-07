@@ -1,7 +1,6 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
-# vCube = 'OOOOOOOOO.RRRRRRRRR.GGGGGGGGG.BBBBBBBBB.WWWWWWWWW.YYYYYYYYY.'
 vCubeSide = {'front': 'OOOOOOOOO', 'back': 'RRRRRRRRR', 'left': 'GGGGGGGGG', 'right': 'BBBBBBBBB',
              'down': 'WWWWWWWWW', 'up': 'YYYYYYYYY'}
 
@@ -32,12 +31,14 @@ def set_side(side: str, value: str):
         exit(1)
 
 
-def sideset_to_str(side: list) -> str:
-    res = str(side[0] + side[1] + side[2] + side[3] + side[4] + side[5] + side[6] + side[7] + side[8])
+def _to_str(side: list) -> str:
+    res = str(side.__getitem__(0) + side.__getitem__(1) + side.__getitem__(2)
+              + side.__getitem__(3) + side.__getitem__(4) + side.__getitem__(5)
+              + side.__getitem__(6) + side.__getitem__(7) + side.__getitem__(8))
     return res
 
 
-def turn_side(side: str, turn: str):
+def turn_side_int(side: str, turn: str):
     res = get_side(side)
     if turn == 'clockwise':
         res = res[6] + res[3] + res[0] + res[7] + res[4] + res[1] + res[8] + res[5] + res[2]
@@ -74,86 +75,86 @@ def turn_side_ext(side1: str, s11, s12, s13: int, side2: str, s21, s22, s23: int
     nside1[s12] = vside4[s42]
     nside1[s13] = vside4[s43]
 
-    set_side(side1, sideset_to_str(nside1))
-    set_side(side2, sideset_to_str(nside2))
-    set_side(side3, sideset_to_str(nside3))
-    set_side(side4, sideset_to_str(nside4))
+    set_side(side1, _to_str(nside1))
+    set_side(side2, _to_str(nside2))
+    set_side(side3, _to_str(nside3))
+    set_side(side4, _to_str(nside4))
 
 
 # front
 def move_front_clockwise():
-    turn_side('front', 'clockwise')
+    turn_side_int('front', 'clockwise')
     turn_side_ext('up', 6, 7, 8, 'right', 0, 3, 6,
                   'down', 2, 1, 0, 'left', 8, 5, 2)
 
 
 def move_front_counterclockwise():
-    turn_side('front', 'counterclockwise')
+    turn_side_int('front', 'counterclockwise')
     turn_side_ext('up', 6, 7, 8, 'left', 8, 5, 2,
                   'down', 2, 1, 0, 'right', 0, 3, 6)
 
 
 # back
 def move_back_clockwise():
-    turn_side('back', 'clockwise')
+    turn_side_int('back', 'clockwise')
     turn_side_ext('up', 0, 1, 2, 'left', 6, 3, 0,
                   'down', 8, 7, 6, 'right', 2, 5, 8)
 
 
 def move_back_counterclockwise():
-    turn_side('back', 'counterclockwise')
+    turn_side_int('back', 'counterclockwise')
     turn_side_ext('up', 0, 1, 2, 'right', 2, 5, 8,
                   'down', 8, 7, 6, 'left', 6, 3, 0)
 
 
 # left
 def move_left_clockwise():
-    turn_side('left', 'clockwise')
+    turn_side_int('left', 'clockwise')
     turn_side_ext('up', 0, 3, 6, 'front', 0, 3, 6,
                   'down', 0, 3, 6, 'back', 8, 5, 2)
 
 
 def move_left_counterclockwise():
-    turn_side('left', 'counterclockwise')
+    turn_side_int('left', 'counterclockwise')
     turn_side_ext('up', 0, 3, 6, 'back', 8, 5, 2,
                   'down', 0, 3, 6, 'front', 0, 3, 6)
 
 
 # right
 def move_right_clockwise():
-    turn_side('right', 'clockwise')
+    turn_side_int('right', 'clockwise')
     turn_side_ext('up', 2, 5, 8, 'back', 6, 3, 0,
                   'down', 2, 5, 8, 'front', 2, 5, 8)
 
 
 def move_right_counterclockwise():
-    turn_side('right', 'counterclockwise')
+    turn_side_int('right', 'counterclockwise')
     turn_side_ext('up', 2, 5, 8, 'front', 2, 5, 8,
                   'down', 2, 5, 8, 'back', 6, 3, 0)
 
 
 # top
 def move_up_clockwise():
-    turn_side('up', 'clockwise')
+    turn_side_int('up', 'clockwise')
     turn_side_ext('front', 0, 1, 2, 'left', 0, 1, 2,
                   'back', 0, 1, 2, 'right', 0, 1, 2)
 
 
 def move_up_counterclockwise():
-    turn_side('up', 'counterclockwise')
+    turn_side_int('up', 'counterclockwise')
     turn_side_ext('front', 0, 1, 2, 'right', 0, 1, 2,
                   'back', 0, 1, 2, 'left', 0, 1, 2)
 
 
 # down
 def move_down_clockwise():
-    turn_side('down', 'clockwise')
+    turn_side_int('down', 'clockwise')
     turn_side_ext('front', 6, 7, 8, 'right', 6, 7, 8,
                   'back', 6, 7, 8, 'left', 6, 7, 8)
 
 
 def move_down_counterclockwise():
-    turn_side('down', 'counterclockwise')
+    turn_side_int('down', 'counterclockwise')
     turn_side_ext('front', 6, 7, 8, 'left', 6, 7, 8,
                   'back', 6, 7, 8, 'right', 6, 7, 8)
 
@@ -169,6 +170,4 @@ if __name__ == '__main__':
     print(vCubeSide)
     print(check_solve())
 
-    a = ['a', 'b', 'c', 'd']
 
-print(a.__getitem__(0))
