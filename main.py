@@ -24,6 +24,10 @@ def show():
           sidedown[6], sidedown[7], sidedown[8], '   ', sideup[6], sideup[7], sideup[8])
 
 
+def show_text():
+    print(vCubeSide['front']+'.'+vCubeSide['back']+'.'+vCubeSide['left']+'.'+
+          vCubeSide['right']+'.'+vCubeSide['down']+'.'+vCubeSide['up'])
+
 def check_solve() -> bool:
     global vCubeSide
     res = vCubeSide == {'front': 'OOOOOOOOO', 'back': 'RRRRRRRRR', 'left': 'GGGGGGGGG', 'right': 'BBBBBBBBB',
@@ -181,11 +185,17 @@ def move_down_counterclockwise():
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print(vCubeSide)
-    for i in range(60):
-        move_back_clockwise()
-        move_left_clockwise()
-        move_back_counterclockwise()
-        move_left_counterclockwise()
+    move_right_clockwise()
+    move_up_clockwise()
+    move_up_clockwise()
+    i = 1
+    while not check_solve():
+        i += 1
+        move_right_clockwise()
+        move_up_clockwise()
+        move_up_clockwise()
+        print(i, end=', ')
+    print()
     print(vCubeSide)
     print(check_solve())
-    show()
+    print(i)
