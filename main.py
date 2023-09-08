@@ -5,6 +5,25 @@ vCubeSide = {'front': 'OOOOOOOOO', 'back': 'RRRRRRRRR', 'left': 'GGGGGGGGG', 'ri
              'down': 'WWWWWWWWW', 'up': 'YYYYYYYYY'}
 
 
+def show():
+    sidefront = get_side('front')
+    sideback = get_side('back')
+    sideleft = get_side('left')
+    sideright = get_side('right')
+    sidedown = get_side('down')
+    sideup = get_side('up')
+    print('front     back      left      right     down      up')
+    print(sidefront[0], sidefront[1], sidefront[2], '   ', sideback[0], sideback[1], sideback[2], '   ',
+          sideleft[0], sideleft[1], sideleft[2], '   ', sideright[0], sideright[1], sideright[2], '   ',
+          sidedown[0], sidedown[1], sidedown[2], '   ', sideup[0], sideup[1], sideup[2])
+    print(sidefront[3], sidefront[4], sidefront[5], '   ', sideback[3], sideback[4], sideback[5], '   ',
+          sideleft[3], sideleft[4], sideleft[5], '   ', sideright[3], sideright[4], sideright[5], '   ',
+          sidedown[3], sidedown[4], sidedown[5], '   ', sideup[3], sideup[4], sideup[5])
+    print(sidefront[6], sidefront[7], sidefront[8], '   ', sideback[6], sideback[7], sideback[8], '   ',
+          sideleft[6], sideleft[7], sideleft[8], '   ', sideright[6], sideright[7], sideright[8], '   ',
+          sidedown[6], sidedown[7], sidedown[8], '   ', sideup[6], sideup[7], sideup[8])
+
+
 def check_solve() -> bool:
     global vCubeSide
     res = vCubeSide == {'front': 'OOOOOOOOO', 'back': 'RRRRRRRRR', 'left': 'GGGGGGGGG', 'right': 'BBBBBBBBB',
@@ -162,12 +181,11 @@ def move_down_counterclockwise():
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print(vCubeSide)
-    for i in range(6):
+    for i in range(60):
         move_back_clockwise()
         move_left_clockwise()
         move_back_counterclockwise()
         move_left_counterclockwise()
     print(vCubeSide)
     print(check_solve())
-
-
+    show()
