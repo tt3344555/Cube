@@ -1,10 +1,9 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
-#vCubeSide = {'front': 'OOOOOOOOO', 'back': 'RRRRRRRRR', 'left': 'GGGGGGGGG', 'right': 'BBBBBBBBB',
-#             'down': 'WWWWWWWWW', 'up': 'YYYYYYYYY'}
 vCubeSideStr = '.YYYYYYYYYGGGGGGGGGOOOOOOOOOBBBBBBBBBRRRRRRRRRWWWWWWWWW'
-vInd = {'up': 0, 'left': 1, 'front': 2, 'right': 3, 'back': 4, 'down': 5}
+vIndSide = {'up': 0, 'left': 1, 'front': 2, 'right': 3, 'back': 4, 'down': 5}
+
 def show():
     sidefront = get_side('front')
     sideback = get_side('back')
@@ -36,7 +35,7 @@ def check_solve() -> bool:
 def get_side(side: str) -> str:
     global vCubeSideStr
     if side in ('front', 'back', 'left', 'right', 'down', 'up'):
-        res = vCubeSideStr[vInd[side]*9+1:vInd[side]*9+10]
+        res = vCubeSideStr[vIndSide[side]*9+1:vIndSide[side]*9+10]
         return res
     else:
         print('get_side: error: set side: front, back, left, right, down, top')
@@ -63,7 +62,7 @@ def set_side(side: str, value: str):
         print('set_side: error: set side: front, back, left, right, down, top')
         exit(1)
 
-def _turn_element(ind1, ind2, ind3, ind4 : int):
+def _change_elements(ind1, ind2, ind3, ind4 : int):
     global vCubeSideStr
     vcube = list(vCubeSideStr)
     tind = vcube[ind4]
@@ -72,7 +71,6 @@ def _turn_element(ind1, ind2, ind3, ind4 : int):
     vcube[ind2] = vcube[ind1]
     vcube[ind1] = tind
     vCubeSideStr = _to_str(vcube)
-    pass
 
 def _to_str(side: list) -> str:
     res = ''
@@ -81,122 +79,130 @@ def _to_str(side: list) -> str:
     return res
 
 
-def turn_side_int(side: str, turn: str):
-    res = get_side(side)
-    if turn == 'clockwise':
-        res = res[6] + res[3] + res[0] + res[7] + res[4] + res[1] + res[8] + res[5] + res[2]
-    elif turn == 'counterclockwise':
-        res = res[2] + res[5] + res[8] + res[1] + res[4] + res[7] + res[0] + res[3] + res[6]
-    else:
-        print('turn_side: error: set turn: clockwise, counterclockwise')
-        exit(1)
-    set_side(side, res)
-
-
 # front
 def move_front_clockwise():
-    _turn_element(19, 21, 27, 25)
-    _turn_element(20, 24, 26, 22)
-    _turn_element(7, 28, 48, 18)
-    _turn_element(8, 31, 47, 15)
-    _turn_element(9, 34, 46, 12)
+    _change_elements(19, 21, 27, 25)
+    _change_elements(20, 24, 26, 22)
+    _change_elements(7, 28, 48, 18)
+    _change_elements(8, 31, 47, 15)
+    _change_elements(9, 34, 46, 12)
 
 
 def move_front_counterclockwise():
-    _turn_element(19, 25, 27, 21)
-    _turn_element(20, 22, 26, 24)
-    _turn_element(7, 18, 48, 28)
-    _turn_element(8, 15, 47, 31)
-    _turn_element(9, 12, 46, 34)
+    _change_elements(19, 25, 27, 21)
+    _change_elements(20, 22, 26, 24)
+    _change_elements(7, 18, 48, 28)
+    _change_elements(8, 15, 47, 31)
+    _change_elements(9, 12, 46, 34)
 
 
 # back
 def move_back_clockwise():
-    _turn_element(37, 39, 45, 43)
-    _turn_element(38, 42, 44, 40)
-    _turn_element(1, 16, 54, 30)
-    _turn_element(2, 13, 53, 33)
-    _turn_element(3, 10, 52, 36)
+    _change_elements(37, 39, 45, 43)
+    _change_elements(38, 42, 44, 40)
+    _change_elements(1, 16, 54, 30)
+    _change_elements(2, 13, 53, 33)
+    _change_elements(3, 10, 52, 36)
 
 
 def move_back_counterclockwise():
-    _turn_element(37, 43, 45, 39)
-    _turn_element(38, 40, 44, 42)
-    _turn_element(1, 30, 54, 16)
-    _turn_element(2, 33, 53, 13)
-    _turn_element(3, 36, 52, 10)
+    _change_elements(37, 43, 45, 39)
+    _change_elements(38, 40, 44, 42)
+    _change_elements(1, 30, 54, 16)
+    _change_elements(2, 33, 53, 13)
+    _change_elements(3, 36, 52, 10)
 
 
 # left
 def move_left_clockwise():
-    _turn_element(10, 12, 18, 16)
-    _turn_element(11, 15, 17, 13)
-    _turn_element(1, 19, 46, 45)
-    _turn_element(4, 22, 49, 42)
-    _turn_element(7, 25, 52, 39)
+    _change_elements(10, 12, 18, 16)
+    _change_elements(11, 15, 17, 13)
+    _change_elements(1, 19, 46, 45)
+    _change_elements(4, 22, 49, 42)
+    _change_elements(7, 25, 52, 39)
 
 
 def move_left_counterclockwise():
-    _turn_element(10, 16, 18, 12)
-    _turn_element(11, 13, 17, 15)
-    _turn_element(1, 45, 46, 19)
-    _turn_element(4, 42, 49, 22)
-    _turn_element(7, 39, 52, 25)
+    _change_elements(10, 16, 18, 12)
+    _change_elements(11, 13, 17, 15)
+    _change_elements(1, 45, 46, 19)
+    _change_elements(4, 42, 49, 22)
+    _change_elements(7, 39, 52, 25)
 
 # right
 def move_right_clockwise():
-    _turn_element(28, 30, 36, 34)
-    _turn_element(31, 29, 33, 35)
-    _turn_element(21, 3, 43, 48)
-    _turn_element(24, 6, 40, 51)
-    _turn_element(27, 9, 37, 54)
+    _change_elements(28, 30, 36, 34)
+    _change_elements(31, 29, 33, 35)
+    _change_elements(21, 3, 43, 48)
+    _change_elements(24, 6, 40, 51)
+    _change_elements(27, 9, 37, 54)
 
 def move_right_counterclockwise():
-    _turn_element(28, 34, 36, 30)
-    _turn_element(31, 35, 33, 29)
-    _turn_element(21, 48, 43, 3)
-    _turn_element(24, 51, 40, 6)
-    _turn_element(27, 54, 37, 9)
+    _change_elements(28, 34, 36, 30)
+    _change_elements(31, 35, 33, 29)
+    _change_elements(21, 48, 43, 3)
+    _change_elements(24, 51, 40, 6)
+    _change_elements(27, 54, 37, 9)
 
 # top
 def move_up_clockwise():
-    _turn_element(1, 3, 9, 7)
-    _turn_element(2, 6, 8, 4)
-    _turn_element(21, 12, 39, 30)
-    _turn_element(20, 11, 38, 29)
-    _turn_element(19, 10, 37, 28)
+    _change_elements(1, 3, 9, 7)
+    _change_elements(2, 6, 8, 4)
+    _change_elements(21, 12, 39, 30)
+    _change_elements(20, 11, 38, 29)
+    _change_elements(19, 10, 37, 28)
 
 def move_up_counterclockwise():
-    _turn_element(1, 7, 9, 3)
-    _turn_element(2, 4, 8, 6)
-    _turn_element(21, 30, 39, 12)
-    _turn_element(20, 29, 38, 11)
-    _turn_element(19, 28, 37, 10)
+    _change_elements(1, 7, 9, 3)
+    _change_elements(2, 4, 8, 6)
+    _change_elements(21, 30, 39, 12)
+    _change_elements(20, 29, 38, 11)
+    _change_elements(19, 28, 37, 10)
 
 # down
 def move_down_clockwise():
-    _turn_element(46, 48, 54, 52)
-    _turn_element(47, 51, 53, 49)
-    _turn_element(25, 34, 43, 16)
-    _turn_element(26, 35, 44, 17)
-    _turn_element(27, 36, 45, 18)
+    _change_elements(46, 48, 54, 52)
+    _change_elements(47, 51, 53, 49)
+    _change_elements(25, 34, 43, 16)
+    _change_elements(26, 35, 44, 17)
+    _change_elements(27, 36, 45, 18)
 
 def move_down_counterclockwise():
-    _turn_element(46, 52, 54, 48)
-    _turn_element(47, 49, 53, 51)
-    _turn_element(25, 16, 43, 34)
-    _turn_element(26, 17, 44, 35)
-    _turn_element(27, 18, 45, 36)
+    _change_elements(46, 52, 54, 48)
+    _change_elements(47, 49, 53, 51)
+    _change_elements(25, 16, 43, 34)
+    _change_elements(26, 17, 44, 35)
+    _change_elements(27, 18, 45, 36)
+
+def _formula_element(element : str):
+    if element == 'R': move_right_clockwise()
+    if element == 'R"': move_right_counterclockwise()
+    if element == 'L': move_left_clockwise()
+    if element == 'L"': move_left_counterclockwise()
+    if element == 'D': move_down_clockwise()
+    if element == 'D"': move_down_counterclockwise()
+    if element == 'U': move_up_clockwise()
+    if element == 'U"': move_up_counterclockwise()
+    if element == 'F': move_front_clockwise()
+    if element == 'F"': move_front_counterclockwise()
+    if element == 'B': move_back_clockwise()
+    if element == 'B"': move_back_counterclockwise()
+
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-#    print(vCubeSideStr)
-    move_down_clockwise()
+    move_right_clockwise()
+    move_up_clockwise()
+    move_right_counterclockwise()
+    move_up_counterclockwise()
     show()
     i = 1
     while not check_solve():
         print(i, end=', ')
         i += 1
-        move_down_clockwise()
+        move_right_clockwise()
+        move_up_clockwise()
+        move_right_counterclockwise()
+        move_up_counterclockwise()
     print()
     print(vCubeSideStr, check_solve(), i)
