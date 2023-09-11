@@ -1,8 +1,8 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
-vCubeSide = {'front': 'OOOOOOOOO', 'back': 'RRRRRRRRR', 'left': 'GGGGGGGGG', 'right': 'BBBBBBBBB',
-             'down': 'WWWWWWWWW', 'up': 'YYYYYYYYY'}
+#vCubeSide = {'front': 'OOOOOOOOO', 'back': 'RRRRRRRRR', 'left': 'GGGGGGGGG', 'right': 'BBBBBBBBB',
+#             'down': 'WWWWWWWWW', 'up': 'YYYYYYYYY'}
 vCubeSideStr = '.YYYYYYYYYGGGGGGGGGOOOOOOOOOBBBBBBBBBRRRRRRRRRWWWWWWWWW'
 vInd = {'up': 0, 'left': 1, 'front': 2, 'right': 3, 'back': 4, 'down': 5}
 def show():
@@ -25,19 +25,18 @@ def show():
 
 
 def show_text():
-    print(vCubeSide['front']+'.'+vCubeSide['back']+'.'+vCubeSide['left']+'.'+
-          vCubeSide['right']+'.'+vCubeSide['down']+'.'+vCubeSide['up'])
+    print(vCubeSideStr)
 
 def check_solve() -> bool:
     global vCubeSideStr
-    res = vCubeSideStr == '.YYYYYYYYYGGGGGGGGGOOOOOOOOOBBBBBBBBBRRRRRRRRRWWWWWWWWW'
+    res = (vCubeSideStr == '.YYYYYYYYYGGGGGGGGGOOOOOOOOOBBBBBBBBBRRRRRRRRRWWWWWWWWW')
     return res
 
 
 def get_side(side: str) -> str:
     global vCubeSideStr
     if side in ('front', 'back', 'left', 'right', 'down', 'up'):
-        res = vCubeSideStr[vInd[side]*9+1,vInd[side]*9+9]
+        res = vCubeSideStr[vInd[side]*9+1:vInd[side]*9+10]
         return res
     else:
         print('get_side: error: set side: front, back, left, right, down, top')
@@ -64,11 +63,21 @@ def set_side(side: str, value: str):
         print('set_side: error: set side: front, back, left, right, down, top')
         exit(1)
 
+def _turn_element(ind1, ind2, ind3, ind4 : int):
+    global vCubeSideStr
+    vcube = list(vCubeSideStr)
+    tind = vcube[ind4]
+    vcube[ind4] = vcube[ind3]
+    vcube[ind3] = vcube[ind2]
+    vcube[ind2] = vcube[ind1]
+    vcube[ind1] = tind
+    vCubeSideStr = _to_str(vcube)
+    pass
 
 def _to_str(side: list) -> str:
-    res = str(side.__getitem__(0) + side.__getitem__(1) + side.__getitem__(2)
-              + side.__getitem__(3) + side.__getitem__(4) + side.__getitem__(5)
-              + side.__getitem__(6) + side.__getitem__(7) + side.__getitem__(8))
+    res = ''
+    for i in range(0,len(side)):
+        res = res + str(side.__getitem__(i))
     return res
 
 
@@ -117,9 +126,14 @@ def turn_side_ext(side1: str, s11, s12, s13: int, side2: str, s21, s22, s23: int
 
 # front
 def move_front_clockwise():
-    turn_side_int('front', 'clockwise')
-    turn_side_ext('up', 6, 7, 8, 'right', 0, 3, 6,
-                  'down', 2, 1, 0, 'left', 8, 5, 2)
+    _turn_element(19, 21, 27, 25)
+    _turn_element(20, 24, 26, 22)
+    _turn_element(7, 28, 48, 18)
+    _turn_element(8, 31, 47, 15)
+    _turn_element(9, 34, 46, 12)
+#    turn_side_int('front', 'clockwise')
+#    turn_side_ext('up', 6, 7, 8, 'right', 0, 3, 6,
+#                  'down', 2, 1, 0, 'left', 8, 5, 2)
 
 
 def move_front_counterclockwise():
@@ -196,16 +210,12 @@ def move_down_counterclockwise():
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print(vCubeSideStr)
-    move_right_clockwise()
-    move_up_clockwise()
-    move_up_clockwise()
+    move_front_clockwise()
     i = 1
     while not check_solve():
-        i += 1
-        move_right_clockwise()
-        move_up_clockwise()
-        move_up_clockwise()
         print(i, end=', ')
+        i += 1
+        move_front_clockwise()
     print()
     print(vCubeSideStr)
     print(check_solve())
