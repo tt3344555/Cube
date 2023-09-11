@@ -131,22 +131,23 @@ def move_front_clockwise():
     _turn_element(7, 28, 48, 18)
     _turn_element(8, 31, 47, 15)
     _turn_element(9, 34, 46, 12)
-#    turn_side_int('front', 'clockwise')
-#    turn_side_ext('up', 6, 7, 8, 'right', 0, 3, 6,
-#                  'down', 2, 1, 0, 'left', 8, 5, 2)
 
 
 def move_front_counterclockwise():
-    turn_side_int('front', 'counterclockwise')
-    turn_side_ext('up', 6, 7, 8, 'left', 8, 5, 2,
-                  'down', 2, 1, 0, 'right', 0, 3, 6)
+    _turn_element(19, 25, 27, 21)
+    _turn_element(20, 22, 26, 24)
+    _turn_element(7, 18, 48, 28)
+    _turn_element(8, 15, 47, 31)
+    _turn_element(9, 12, 46, 34)
 
 
 # back
 def move_back_clockwise():
-    turn_side_int('back', 'clockwise')
-    turn_side_ext('up', 0, 1, 2, 'left', 6, 3, 0,
-                  'down', 8, 7, 6, 'right', 2, 5, 8)
+    _turn_element(37, 39, 45, 43)
+    _turn_element(38, 42, 44, 40)
+    _turn_element(1, 16, 54, 30)
+    _turn_element(2, 13, 53, 33)
+    _turn_element(3, 10, 52, 36)
 
 
 def move_back_counterclockwise():
@@ -210,13 +211,12 @@ def move_down_counterclockwise():
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print(vCubeSideStr)
-    move_front_clockwise()
+    move_back_clockwise()
+    show()
     i = 1
     while not check_solve():
         print(i, end=', ')
         i += 1
-        move_front_clockwise()
+        move_back_clockwise()
     print()
-    print(vCubeSideStr)
-    print(check_solve())
-    print(i)
+    print(vCubeSideStr, check_solve(), i)
