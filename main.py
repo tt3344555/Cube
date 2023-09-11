@@ -93,37 +93,6 @@ def turn_side_int(side: str, turn: str):
     set_side(side, res)
 
 
-def turn_side_ext(side1: str, s11, s12, s13: int, side2: str, s21, s22, s23: int,
-                  side3: str, s31, s32, s33: int, side4: str, s41, s42, s43: int):
-    vside1 = get_side(side1)
-    vside2 = get_side(side2)
-    vside3 = get_side(side3)
-    vside4 = get_side(side4)
-
-    nside1 = list(vside1)
-    nside2 = list(vside2)
-    nside3 = list(vside3)
-    nside4 = list(vside4)
-
-    nside2[s21] = vside1[s11]
-    nside2[s22] = vside1[s12]
-    nside2[s23] = vside1[s13]
-    nside3[s31] = vside2[s21]
-    nside3[s32] = vside2[s22]
-    nside3[s33] = vside2[s23]
-    nside4[s41] = vside3[s31]
-    nside4[s42] = vside3[s32]
-    nside4[s43] = vside3[s33]
-    nside1[s11] = vside4[s41]
-    nside1[s12] = vside4[s42]
-    nside1[s13] = vside4[s43]
-
-    set_side(side1, _to_str(nside1))
-    set_side(side2, _to_str(nside2))
-    set_side(side3, _to_str(nside3))
-    set_side(side4, _to_str(nside4))
-
-
 # front
 def move_front_clockwise():
     _turn_element(19, 21, 27, 25)
@@ -151,72 +120,83 @@ def move_back_clockwise():
 
 
 def move_back_counterclockwise():
-    turn_side_int('back', 'counterclockwise')
-    turn_side_ext('up', 0, 1, 2, 'right', 2, 5, 8,
-                  'down', 8, 7, 6, 'left', 6, 3, 0)
+    _turn_element(37, 43, 45, 39)
+    _turn_element(38, 40, 44, 42)
+    _turn_element(1, 30, 54, 16)
+    _turn_element(2, 33, 53, 13)
+    _turn_element(3, 36, 52, 10)
 
 
 # left
 def move_left_clockwise():
-    turn_side_int('left', 'clockwise')
-    turn_side_ext('up', 0, 3, 6, 'front', 0, 3, 6,
-                  'down', 0, 3, 6, 'back', 8, 5, 2)
+    _turn_element(10, 12, 18, 16)
+    _turn_element(11, 15, 17, 13)
+    _turn_element(1, 19, 46, 45)
+    _turn_element(4, 22, 49, 42)
+    _turn_element(7, 25, 52, 39)
 
 
 def move_left_counterclockwise():
-    turn_side_int('left', 'counterclockwise')
-    turn_side_ext('up', 0, 3, 6, 'back', 8, 5, 2,
-                  'down', 0, 3, 6, 'front', 0, 3, 6)
-
+    _turn_element(10, 16, 18, 12)
+    _turn_element(11, 13, 17, 15)
+    _turn_element(1, 45, 46, 19)
+    _turn_element(4, 42, 49, 22)
+    _turn_element(7, 39, 52, 25)
 
 # right
 def move_right_clockwise():
-    turn_side_int('right', 'clockwise')
-    turn_side_ext('up', 2, 5, 8, 'back', 6, 3, 0,
-                  'down', 2, 5, 8, 'front', 2, 5, 8)
-
+    _turn_element(28, 30, 36, 34)
+    _turn_element(31, 29, 33, 35)
+    _turn_element(21, 3, 43, 48)
+    _turn_element(24, 6, 40, 51)
+    _turn_element(27, 9, 37, 54)
 
 def move_right_counterclockwise():
-    turn_side_int('right', 'counterclockwise')
-    turn_side_ext('up', 2, 5, 8, 'front', 2, 5, 8,
-                  'down', 2, 5, 8, 'back', 6, 3, 0)
-
+    _turn_element(28, 34, 36, 30)
+    _turn_element(31, 35, 33, 29)
+    _turn_element(21, 48, 43, 3)
+    _turn_element(24, 51, 40, 6)
+    _turn_element(27, 54, 37, 9)
 
 # top
 def move_up_clockwise():
-    turn_side_int('up', 'clockwise')
-    turn_side_ext('front', 0, 1, 2, 'left', 0, 1, 2,
-                  'back', 0, 1, 2, 'right', 0, 1, 2)
-
+    _turn_element(1, 3, 9, 7)
+    _turn_element(2, 6, 8, 4)
+    _turn_element(21, 12, 39, 30)
+    _turn_element(20, 11, 38, 29)
+    _turn_element(19, 10, 37, 28)
 
 def move_up_counterclockwise():
-    turn_side_int('up', 'counterclockwise')
-    turn_side_ext('front', 0, 1, 2, 'right', 0, 1, 2,
-                  'back', 0, 1, 2, 'left', 0, 1, 2)
-
+    _turn_element(1, 7, 9, 3)
+    _turn_element(2, 4, 8, 6)
+    _turn_element(21, 30, 39, 12)
+    _turn_element(20, 29, 38, 11)
+    _turn_element(19, 28, 37, 10)
 
 # down
 def move_down_clockwise():
-    turn_side_int('down', 'clockwise')
-    turn_side_ext('front', 6, 7, 8, 'right', 6, 7, 8,
-                  'back', 6, 7, 8, 'left', 6, 7, 8)
-
+    _turn_element(46, 48, 54, 52)
+    _turn_element(47, 51, 53, 49)
+    _turn_element(25, 34, 43, 16)
+    _turn_element(26, 35, 44, 17)
+    _turn_element(27, 36, 45, 18)
 
 def move_down_counterclockwise():
-    turn_side_int('down', 'counterclockwise')
-    turn_side_ext('front', 6, 7, 8, 'left', 6, 7, 8,
-                  'back', 6, 7, 8, 'right', 6, 7, 8)
-
+    _turn_element(46, 52, 54, 48)
+    _turn_element(47, 49, 53, 51)
+    _turn_element(25, 16, 43, 34)
+    _turn_element(26, 17, 44, 35)
+    _turn_element(27, 18, 45, 36)
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print(vCubeSideStr)
-    move_back_clockwise()
+#    print(vCubeSideStr)
+    move_down_clockwise()
     show()
     i = 1
     while not check_solve():
         print(i, end=', ')
         i += 1
-        move_back_clockwise()
+        move_down_clockwise()
     print()
     print(vCubeSideStr, check_solve(), i)
