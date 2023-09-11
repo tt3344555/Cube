@@ -224,11 +224,11 @@ def _formula(formula: list):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    _formula(['S'])
+    _formula(['R', 'U'])
     show()
     i = 1
     while not check_solve():
         #        print(i, end=', ')
         i += 1
-        _formula(['S'])
+        _formula(['R', 'U'])
     print(vCubeSideStr, check_solve(), i)
