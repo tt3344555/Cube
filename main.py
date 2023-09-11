@@ -3,8 +3,8 @@
 
 vCubeSide = {'front': 'OOOOOOOOO', 'back': 'RRRRRRRRR', 'left': 'GGGGGGGGG', 'right': 'BBBBBBBBB',
              'down': 'WWWWWWWWW', 'up': 'YYYYYYYYY'}
-
-
+vCubeSideStr = '.YYYYYYYYYGGGGGGGGGOOOOOOOOOBBBBBBBBBRRRRRRRRRWWWWWWWWW'
+vInd = {'up': 0, 'left': 1, 'front': 2, 'right': 3, 'back': 4, 'down': 5}
 def show():
     sidefront = get_side('front')
     sideback = get_side('back')
@@ -29,16 +29,15 @@ def show_text():
           vCubeSide['right']+'.'+vCubeSide['down']+'.'+vCubeSide['up'])
 
 def check_solve() -> bool:
-    global vCubeSide
-    res = vCubeSide == {'front': 'OOOOOOOOO', 'back': 'RRRRRRRRR', 'left': 'GGGGGGGGG', 'right': 'BBBBBBBBB',
-                        'down': 'WWWWWWWWW', 'up': 'YYYYYYYYY'}
+    global vCubeSideStr
+    res = vCubeSideStr == '.YYYYYYYYYGGGGGGGGGOOOOOOOOOBBBBBBBBBRRRRRRRRRWWWWWWWWW'
     return res
 
 
 def get_side(side: str) -> str:
-    global vCubeSide
+    global vCubeSideStr
     if side in ('front', 'back', 'left', 'right', 'down', 'up'):
-        res = vCubeSide[side]
+        res = vCubeSideStr[vInd[side]*9+1,vInd[side]*9+9]
         return res
     else:
         print('get_side: error: set side: front, back, left, right, down, top')
@@ -46,9 +45,21 @@ def get_side(side: str) -> str:
 
 
 def set_side(side: str, value: str):
-    global vCubeSide
+    global vCubeSideStr
     if side in ('front', 'back', 'left', 'right', 'down', 'up'):
-        vCubeSide[side] = value
+        fside = get_side('front')
+        bside = get_side('back')
+        lside = get_side('left')
+        rside = get_side('right')
+        dside = get_side('down')
+        uside = get_side('up')
+        if side == 'front': fside = value
+        if side == 'back': bside = value
+        if side == 'left': lside = value
+        if side == 'right': rside = value
+        if side == 'down': dside = value
+        if side == 'up': uside = value
+        vCubeSideStr = '.' + uside + lside + fside + rside + bside + dside
     else:
         print('set_side: error: set side: front, back, left, right, down, top')
         exit(1)
@@ -184,7 +195,7 @@ def move_down_counterclockwise():
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print(vCubeSide)
+    print(vCubeSideStr)
     move_right_clockwise()
     move_up_clockwise()
     move_up_clockwise()
@@ -196,6 +207,6 @@ if __name__ == '__main__':
         move_up_clockwise()
         print(i, end=', ')
     print()
-    print(vCubeSide)
+    print(vCubeSideStr)
     print(check_solve())
     print(i)
