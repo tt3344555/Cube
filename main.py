@@ -199,8 +199,58 @@ def move_s():
     _change_elements(5, 32, 50, 14)
     _change_elements(6, 35, 49, 11)
 
+def move_r2_clock():
+    move_r_clock()
+    move_r_clock()
+
+def move_r2_counterclock():
+    move_r_clock()
+    move_r_clock()
+
+def move_l2_clock():
+    move_l_clock()
+    move_l_clock()
+
+def move_l2_counterclock()
+    move_l_clock()
+    move_l_clock()
+
+def move_f2_clock():
+    move_f_clock()
+    move_f_clock()
+
+def move_f2_counterclock():
+    move_f_clock()
+    move_f_clock()
+
+def move_b2_clock():
+    move_b_clock()
+    move_b_clock()
+
+def move_b2_counterclock():
+    move_b_clock()
+    move_b_clock()
+
+def move_u2_clock():
+    move_u_clock()
+    move_u2_clock()
+
+def move_u2_counterclock()
+    move_u_clock()
+    move_u2_clock()
+
+def move_d2_clock():
+    move_d_clock()
+    move_d_clock()
+
+def move_d2_counterclock():
+    move_d_clock()
+    move_d_clock()
+
+
 def _formula_element(element: str):
     if element == 'R': move_r_clock()
+    if element == 'R2': move_r2_clock()
     if element == 'R"': move_r_counterclock()
     if element == 'L': move_l_clock()
     if element == 'L"': move_l_counterclock()
