@@ -5,7 +5,7 @@ vCubeSideStr = '.YYYYYYYYYGGGGGGGGGOOOOOOOOOBBBBBBBBBRRRRRRRRRWWWWWWWWW'
 vIndSide = {'up': 0, 'left': 1, 'front': 2, 'right': 3, 'back': 4, 'down': 5}
 
 
-def show():
+def show_sides():
     sidefront = get_side('front')
     sideback = get_side('back')
     sideleft = get_side('left')
@@ -44,27 +44,6 @@ def get_side(side: str) -> str:
         exit(1)
 
 
-#def set_side(side: str, value: str):
-#    global vCubeSideStr
-#    if side in ('front', 'back', 'left', 'right', 'down', 'up'):
-#        fside = get_side('front')
-#        bside = get_side('back')
-#        lside = get_side('left')
-#        rside = get_side('right')
-#        dside = get_side('down')
-#        uside = get_side('up')
-#        if side == 'front': fside = value
-#        if side == 'back': bside = value
-#        if side == 'left': lside = value
-#        if side == 'right': rside = value
-#        if side == 'down': dside = value
-#        if side == 'up': uside = value
-#        vCubeSideStr = '.' + uside + lside + fside + rside + bside + dside
-#    else:
-#        print('set_side: error: set side: front, back, left, right, down, top')
-#        exit(1)
-
-
 def _change_elements(ind1, ind2, ind3, ind4: int):
     global vCubeSideStr
     vcube = list(vCubeSideStr)
@@ -84,187 +63,170 @@ def _to_str(side: list) -> str:
 
 
 # front
-def move_f_clock():
-    _change_elements(19, 21, 27, 25)
-    _change_elements(20, 24, 26, 22)
-    _change_elements(7, 28, 48, 18)
-    _change_elements(8, 31, 47, 15)
-    _change_elements(9, 34, 46, 12)
+def move_f_clock(count : int):
+    for i in range(1,count):
+        _change_elements(19, 21, 27, 25)
+        _change_elements(20, 24, 26, 22)
+        _change_elements(7, 28, 48, 18)
+        _change_elements(8, 31, 47, 15)
+        _change_elements(9, 34, 46, 12)
 
 
-def move_f_counterclock():
-    _change_elements(19, 25, 27, 21)
-    _change_elements(20, 22, 26, 24)
-    _change_elements(7, 18, 48, 28)
-    _change_elements(8, 15, 47, 31)
-    _change_elements(9, 12, 46, 34)
+def move_f_counterclock(count : int):
+    for i in range(1,count):
+        _change_elements(19, 25, 27, 21)
+        _change_elements(20, 22, 26, 24)
+        _change_elements(7, 18, 48, 28)
+        _change_elements(8, 15, 47, 31)
+        _change_elements(9, 12, 46, 34)
 
 
 # back
-def move_b_clock():
-    _change_elements(37, 39, 45, 43)
-    _change_elements(38, 42, 44, 40)
-    _change_elements(1, 16, 54, 30)
-    _change_elements(2, 13, 53, 33)
-    _change_elements(3, 10, 52, 36)
+def move_b_clock(count : int):
+    for i in range(1,count):
+        _change_elements(37, 39, 45, 43)
+        _change_elements(38, 42, 44, 40)
+        _change_elements(1, 16, 54, 30)
+        _change_elements(2, 13, 53, 33)
+        _change_elements(3, 10, 52, 36)
 
 
-def move_b_counterclock():
-    _change_elements(37, 43, 45, 39)
-    _change_elements(38, 40, 44, 42)
-    _change_elements(1, 30, 54, 16)
-    _change_elements(2, 33, 53, 13)
-    _change_elements(3, 36, 52, 10)
+def move_b_counterclock(count : int):
+    for i in range(1,count):
+        _change_elements(37, 43, 45, 39)
+        _change_elements(38, 40, 44, 42)
+        _change_elements(1, 30, 54, 16)
+        _change_elements(2, 33, 53, 13)
+        _change_elements(3, 36, 52, 10)
 
 
 # left
-def move_l_clock():
-    _change_elements(10, 12, 18, 16)
-    _change_elements(11, 15, 17, 13)
-    _change_elements(1, 19, 46, 45)
-    _change_elements(4, 22, 49, 42)
-    _change_elements(7, 25, 52, 39)
+def move_l_clock(count : int):
+    for i in range(1,count):
+        _change_elements(10, 12, 18, 16)
+        _change_elements(11, 15, 17, 13)
+        _change_elements(1, 19, 46, 45)
+        _change_elements(4, 22, 49, 42)
+        _change_elements(7, 25, 52, 39)
 
 
-def move_l_counterclock():
-    _change_elements(10, 16, 18, 12)
-    _change_elements(11, 13, 17, 15)
-    _change_elements(1, 45, 46, 19)
-    _change_elements(4, 42, 49, 22)
-    _change_elements(7, 39, 52, 25)
+def move_l_counterclock(count : int):
+    for i in range(1,count):
+        _change_elements(10, 16, 18, 12)
+        _change_elements(11, 13, 17, 15)
+        _change_elements(1, 45, 46, 19)
+        _change_elements(4, 42, 49, 22)
+        _change_elements(7, 39, 52, 25)
 
 
 # right
-def move_r_clock():
-    _change_elements(28, 30, 36, 34)
-    _change_elements(31, 29, 33, 35)
-    _change_elements(21, 3, 43, 48)
-    _change_elements(24, 6, 40, 51)
-    _change_elements(27, 9, 37, 54)
+def move_r_clock(count : int):
+    for i in range(1,count):
+        _change_elements(28, 30, 36, 34)
+        _change_elements(31, 29, 33, 35)
+        _change_elements(21, 3, 43, 48)
+        _change_elements(24, 6, 40, 51)
+        _change_elements(27, 9, 37, 54)
 
 
-def move_r_counterclock():
-    _change_elements(28, 34, 36, 30)
-    _change_elements(31, 35, 33, 29)
-    _change_elements(21, 48, 43, 3)
-    _change_elements(24, 51, 40, 6)
-    _change_elements(27, 54, 37, 9)
+def move_r_counterclock(count : int):
+    for i in range(1,count):
+        _change_elements(28, 34, 36, 30)
+        _change_elements(31, 35, 33, 29)
+        _change_elements(21, 48, 43, 3)
+        _change_elements(24, 51, 40, 6)
+        _change_elements(27, 54, 37, 9)
 
 
 # top
-def move_u_clock():
-    _change_elements(1, 3, 9, 7)
-    _change_elements(2, 6, 8, 4)
-    _change_elements(21, 12, 39, 30)
-    _change_elements(20, 11, 38, 29)
-    _change_elements(19, 10, 37, 28)
+def move_u_clock(count : int):
+    for i in range(1,count):
+        _change_elements(1, 3, 9, 7)
+        _change_elements(2, 6, 8, 4)
+        _change_elements(21, 12, 39, 30)
+        _change_elements(20, 11, 38, 29)
+        _change_elements(19, 10, 37, 28)
 
 
-def move_u_counterclock():
-    _change_elements(1, 7, 9, 3)
-    _change_elements(2, 4, 8, 6)
-    _change_elements(21, 30, 39, 12)
-    _change_elements(20, 29, 38, 11)
-    _change_elements(19, 28, 37, 10)
+def move_u_counterclock(count : int):
+    for i in range(1, count):
+        _change_elements(1, 7, 9, 3)
+        _change_elements(2, 4, 8, 6)
+        _change_elements(21, 30, 39, 12)
+        _change_elements(20, 29, 38, 11)
+        _change_elements(19, 28, 37, 10)
 
 
 # down
-def move_d_clock():
-    _change_elements(46, 48, 54, 52)
-    _change_elements(47, 51, 53, 49)
-    _change_elements(25, 34, 43, 16)
-    _change_elements(26, 35, 44, 17)
-    _change_elements(27, 36, 45, 18)
+def move_d_clock(count : int):
+    for i in range(1, count):
+        _change_elements(46, 48, 54, 52)
+        _change_elements(47, 51, 53, 49)
+        _change_elements(25, 34, 43, 16)
+        _change_elements(26, 35, 44, 17)
+        _change_elements(27, 36, 45, 18)
 
 
-def move_d_counterclock():
-    _change_elements(46, 52, 54, 48)
-    _change_elements(47, 49, 53, 51)
-    _change_elements(25, 16, 43, 34)
-    _change_elements(26, 17, 44, 35)
-    _change_elements(27, 18, 45, 36)
+def move_d_counterclock(count : int):
+    for i in range(1,count):
+        _change_elements(46, 52, 54, 48)
+        _change_elements(47, 49, 53, 51)
+        _change_elements(25, 16, 43, 34)
+        _change_elements(26, 17, 44, 35)
+        _change_elements(27, 18, 45, 36)
 
-def move_m():
-    _change_elements(2, 20, 47, 44)
-    _change_elements(5, 23, 50, 41)
-    _change_elements(8, 26, 53, 38)
+def move_m(count : int):
+    for i in range(1,count):
+        _change_elements(2, 20, 47, 44)
+        _change_elements(5, 23, 50, 41)
+        _change_elements(8, 26, 53, 38)
 
-def move_e():
-    _change_elements(22, 31, 40, 13)
-    _change_elements(23, 32, 41, 14)
-    _change_elements(24, 33, 42, 15)
+def move_e(count : int):
+    for i in range(1,count):
+        _change_elements(22, 31, 40, 13)
+        _change_elements(23, 32, 41, 14)
+        _change_elements(24, 33, 42, 15)
 
-def move_s():
-    _change_elements(4, 29, 51, 17)
-    _change_elements(5, 32, 50, 14)
-    _change_elements(6, 35, 49, 11)
-
-def move_r2_clock():
-    move_r_clock()
-    move_r_clock()
-
-def move_r2_counterclock():
-    move_r_clock()
-    move_r_clock()
-
-def move_l2_clock():
-    move_l_clock()
-    move_l_clock()
-
-def move_l2_counterclock()
-    move_l_clock()
-    move_l_clock()
-
-def move_f2_clock():
-    move_f_clock()
-    move_f_clock()
-
-def move_f2_counterclock():
-    move_f_clock()
-    move_f_clock()
-
-def move_b2_clock():
-    move_b_clock()
-    move_b_clock()
-
-def move_b2_counterclock():
-    move_b_clock()
-    move_b_clock()
-
-def move_u2_clock():
-    move_u_clock()
-    move_u2_clock()
-
-def move_u2_counterclock()
-    move_u_clock()
-    move_u2_clock()
-
-def move_d2_clock():
-    move_d_clock()
-    move_d_clock()
-
-def move_d2_counterclock():
-    move_d_clock()
-    move_d_clock()
+def move_s(count: int):
+    for i in range(1,count):
+        _change_elements(4, 29, 51, 17)
+        _change_elements(5, 32, 50, 14)
+        _change_elements(6, 35, 49, 11)
 
 
 def _formula_element(element: str):
-    if element == 'R': move_r_clock()
-    if element == 'R2': move_r2_clock()
-    if element == 'R"': move_r_counterclock()
-    if element == 'L': move_l_clock()
-    if element == 'L"': move_l_counterclock()
-    if element == 'D': move_d_clock()
-    if element == 'D"': move_d_counterclock()
-    if element == 'U': move_u_clock()
-    if element == 'U"': move_u_counterclock()
-    if element == 'F': move_f_clock()
-    if element == 'F"': move_f_counterclock()
-    if element == 'B': move_b_clock()
-    if element == 'B"': move_b_counterclock()
-    if element == 'M': move_m()
-    if element == 'E': move_e()
-    if element == 'S': move_s()
+#once
+    if element == 'R': move_r_clock(1)
+    if element == 'R"': move_r_counterclock(1)
+    if element == 'L': move_l_clock(1)
+    if element == 'L"': move_l_counterclock(1)
+    if element == 'D': move_d_clock(1)
+    if element == 'D"': move_d_counterclock(1)
+    if element == 'U': move_u_clock(1)
+    if element == 'U"': move_u_counterclock(1)
+    if element == 'F': move_f_clock(1)
+    if element == 'F"': move_f_counterclock(1)
+    if element == 'B': move_b_clock(1)
+    if element == 'B"': move_b_counterclock(1)
+    if element == 'M': move_m(1)
+    if element == 'E': move_e(1)
+    if element == 'S': move_s(1)
+# twice
+    if element == 'R2': move_r_clock(2)
+    if element == 'R"2': move_r_counterclock(2)
+    if element == 'L2': move_l_clock(2)
+    if element == 'L"2': move_l_counterclock(2)
+    if element == 'D2': move_d_clock(2)
+    if element == 'D"2': move_d_counterclock(2)
+    if element == 'U2': move_u_clock(2)
+    if element == 'U"2': move_u_counterclock(2)
+    if element == 'F2': move_f_clock(2)
+    if element == 'F"2': move_f_counterclock(2)
+    if element == 'B2': move_b_clock(2)
+    if element == 'B"2': move_b_counterclock(2)
+    if element == 'M2': move_m(2)
+    if element == 'E2': move_e(2)
+    if element == 'S2': move_s(2)
 
 
 def _formula(formula: list):
@@ -274,11 +236,12 @@ def _formula(formula: list):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    _formula(['R', 'U'])
-    show()
+    ff = ('F2', 'R2', 'F"2', 'R"2')
+    _formula(ff)
+    show_sides()
     i = 1
     while not check_solve():
         #        print(i, end=', ')
         i += 1
-        _formula(['R', 'U'])
+        _formula(ff)
     print(vCubeSideStr, check_solve(), i)
