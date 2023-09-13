@@ -38,7 +38,7 @@ def show_sides(v_cube_side: str):
 def show_text(v_cube: str):
     for iside in ('up', 'left', 'front', 'right', 'back', 'down'):
         vside = v_cube[vSide[iside] * 9 + 1: vSide[iside] * 9 + 10]
-        print(vside, end=' ')
+        print(iside, vside, end=' ')
     print()
 
 
