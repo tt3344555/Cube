@@ -93,7 +93,7 @@ def move_f(v_cube: str, count: int) -> str:
     return v_cube
 
 
-def move_f_counterclock(v_cube: str, count: int):
+def move_f_cc(v_cube: str, count: int):
     for i in range(0, count):
         v_cube = _change_elements(v_cube, 19, 25, 27, 21)
         v_cube = _change_elements(v_cube, 20, 22, 26, 24)
@@ -114,7 +114,7 @@ def move_b(v_cube: str, count: int):
     return v_cube
 
 
-def move_b_counterclock(v_cube: str, count: int):
+def move_b_cc(v_cube: str, count: int):
     for i in range(0, count):
         v_cube = _change_elements(v_cube, 37, 43, 45, 39)
         v_cube = _change_elements(v_cube, 38, 40, 44, 42)
@@ -135,7 +135,7 @@ def move_l(v_cube: str, count: int):
     return v_cube
 
 
-def move_l_counterclock(v_cube: str, count: int):
+def move_l_cc(v_cube: str, count: int):
     for i in range(0, count):
         v_cube = _change_elements(v_cube, 10, 16, 18, 12)
         v_cube = _change_elements(v_cube, 11, 13, 17, 15)
@@ -156,7 +156,7 @@ def move_r(v_cube: str, count: int):
     return v_cube
 
 
-def move_r_counterclock(v_cube: str, count: int):
+def move_r_cc(v_cube: str, count: int):
     for i in range(0, count):
         v_cube = _change_elements(v_cube, 28, 34, 36, 30)
         v_cube = _change_elements(v_cube, 31, 35, 33, 29)
@@ -177,7 +177,7 @@ def move_u(v_cube: str, count: int):
     return v_cube
 
 
-def move_u_counterclock(v_cube: str, count: int):
+def move_u_cc(v_cube: str, count: int):
     for i in range(0, count):
         v_cube = _change_elements(v_cube, 1, 7, 9, 3)
         v_cube = _change_elements(v_cube, 2, 4, 8, 6)
@@ -198,7 +198,7 @@ def move_d(v_cube: str, count: int):
     return v_cube
 
 
-def move_d_counterclock(v_cube: str, count: int):
+def move_d_cc(v_cube: str, count: int):
     for i in range(0, count):
         v_cube = _change_elements(v_cube, 46, 52, 54, 48)
         v_cube = _change_elements(v_cube, 47, 49, 53, 51)
@@ -232,6 +232,54 @@ def move_s(v_cube: str, count: int):
     return v_cube
 
 
+def _formula_element(v_cube, element: str) -> str:
+    # once
+    if element == 'R': v_cube = move_r(v_cube, 1)
+    if element == 'L': v_cube = move_l(v_cube, 1)
+    if element == 'D': v_cube = move_d(v_cube, 1)
+    if element == 'U': v_cube = move_u(v_cube, 1)
+    if element == 'F': v_cube = move_f(v_cube, 1)
+    if element == 'B': v_cube = move_b(v_cube, 1)
+    if element == 'M': v_cube = move_m(v_cube, 1)
+    if element == 'E': v_cube = move_e(v_cube, 1)
+    if element == 'S': v_cube = move_s(v_cube, 1)
+    if element == 'R"': v_cube = move_r_cc(v_cube, 1)
+    if element == 'L"': v_cube = move_l_cc(v_cube, 1)
+    if element == 'D"': v_cube = move_d_cc(v_cube, 1)
+    if element == 'U"': v_cube = move_u_cc(v_cube, 1)
+    if element == 'F"': v_cube = move_f_cc(v_cube, 1)
+    if element == 'B"': v_cube = move_b_cc(v_cube, 1)
+    if element == 'M"': v_cube = move_m(v_cube, 3)
+    if element == 'E"': v_cube = move_e(v_cube, 3)
+    if element == 'S"': v_cube = move_s(v_cube, 3)
+    # twice
+    if element == 'R2': v_cube = move_r(v_cube, 2)
+    if element == 'L2': v_cube = move_l(v_cube, 2)
+    if element == 'D2': v_cube = move_d(v_cube, 2)
+    if element == 'U2': v_cube = move_u(v_cube, 2)
+    if element == 'F2': v_cube = move_f(v_cube, 2)
+    if element == 'B2': v_cube = move_b(v_cube, 2)
+    if element == 'M2': v_cube = move_m(v_cube, 2)
+    if element == 'E2': v_cube = move_e(v_cube, 2)
+    if element == 'S2': v_cube = move_s(v_cube, 2)
+    if element == 'R"2': v_cube = move_r_cc(v_cube, 2)
+    if element == 'L"2': v_cube = move_l_cc(v_cube, 2)
+    if element == 'D"2': v_cube = move_d_cc(v_cube, 2)
+    if element == 'U"2': v_cube = move_u_cc(v_cube, 2)
+    if element == 'F"2': v_cube = move_f_cc(v_cube, 2)
+    if element == 'B"2': v_cube = move_b_cc(v_cube, 2)
+    if element == 'M"2': v_cube = move_m(v_cube, 2)
+    if element == 'E"2': v_cube = move_e(v_cube, 2)
+    if element == 'S"2': v_cube = move_s(v_cube, 2)
+    return v_cube
+
+
+def _formula(v_cube: str, formula: list) -> str:
+    for ind in range(0, len(formula)):
+        v_cube = _formula_element(v_cube, formula.__getitem__(ind))
+    return v_cube
+
+
 def calc_cube_state(v_cube: str) -> str:
     v_cube_state_list = list('.0000X00000000X00000000X00000000X00000000X00000000X0000')
     for iside in ('up', 'left', 'front', 'right', 'back', 'down'):
@@ -257,64 +305,34 @@ def calc_cube_done(v_cube_state: str) -> int:
     return v_done
 
 
-def _formula_element(v_cube, element: str) -> str:
-    # once
-    if element == 'R': v_cube = move_r(v_cube, 1)
-    if element == 'L': v_cube = move_l(v_cube, 1)
-    if element == 'D': v_cube = move_d(v_cube, 1)
-    if element == 'U': v_cube = move_u(v_cube, 1)
-    if element == 'F': v_cube = move_f(v_cube, 1)
-    if element == 'B': v_cube = move_b(v_cube, 1)
-    if element == 'M': v_cube = move_m(v_cube, 1)
-    if element == 'E': v_cube = move_e(v_cube, 1)
-    if element == 'S': v_cube = move_s(v_cube, 1)
-    if element == 'R"': v_cube = move_r_counterclock(v_cube, 1)
-    if element == 'L"': v_cube = move_l_counterclock(v_cube, 1)
-    if element == 'D"': v_cube = move_d_counterclock(v_cube, 1)
-    if element == 'U"': v_cube = move_u_counterclock(v_cube, 1)
-    if element == 'F"': v_cube = move_f_counterclock(v_cube, 1)
-    if element == 'B"': v_cube = move_b_counterclock(v_cube, 1)
-    if element == 'M"': v_cube = move_m(v_cube, 3)
-    if element == 'E"': v_cube = move_e(v_cube, 3)
-    if element == 'S"': v_cube = move_s(v_cube, 3)
-    # twice
-    if element == 'R2': v_cube = move_r(v_cube, 2)
-    if element == 'L2': v_cube = move_l(v_cube, 2)
-    if element == 'D2': v_cube = move_d(v_cube, 2)
-    if element == 'U2': v_cube = move_u(v_cube, 2)
-    if element == 'F2': v_cube = move_f(v_cube, 2)
-    if element == 'B2': v_cube = move_b(v_cube, 2)
-    if element == 'M2': v_cube = move_m(v_cube, 2)
-    if element == 'E2': v_cube = move_e(v_cube, 2)
-    if element == 'S2': v_cube = move_s(v_cube, 2)
-    if element == 'R"2': v_cube = move_r_counterclock(v_cube, 2)
-    if element == 'L"2': v_cube = move_l_counterclock(v_cube, 2)
-    if element == 'D"2': v_cube = move_d_counterclock(v_cube, 2)
-    if element == 'U"2': v_cube = move_u_counterclock(v_cube, 2)
-    if element == 'F"2': v_cube = move_f_counterclock(v_cube, 2)
-    if element == 'B"2': v_cube = move_b_counterclock(v_cube, 2)
-    if element == 'M"2': v_cube = move_m(v_cube, 2)
-    if element == 'E"2': v_cube = move_e(v_cube, 2)
-    if element == 'S"2': v_cube = move_s(v_cube, 2)
-    return v_cube
-
-
-def _formula(v_cube: str, formula: list) -> str:
-    for ind in range(0, len(formula)):
-        v_cube = _formula_element(v_cube, formula.__getitem__(ind))
-    return v_cube
-
-
 def _scramble(count: int) -> list:
     ff = []
     for ind in range(0, count):
         ff.append(vTurn[round((len(vTurn) - 1) * random())])
     return ff
 
+def _find_next_move(v_cube: str, v_cube_turn: list) -> list:
+    v_cube_state = calc_cube_state(v_cube)
+    v_cube_done = calc_cube_done(v_cube_state)
+    v_cube_done_new_max = v_cube_done
+    v_next_move = []
+    for ind in range(0, len(v_cube_turn)):
+        ff = []
+        if v_cube_turn[ind] != 'X':
+            ff.append(v_cube_turn[ind])
+            v_cube_new = _formula(v_cube, ff)
+            v_cube_state_new = calc_cube_state(v_cube_new)
+            v_cube_done_new = calc_cube_done(v_cube_state_new)
+            if v_cube_done_new > v_cube_done:
+                if v_cube_done_new > v_cube_done_new_max:
+                    v_cube_done_new_max = v_cube_done_new
+                    v_next_move = ff
+    print(v_next_move, v_cube_done_new_max)
+    return v_next_move
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    ff = ['E"2', 'B2', 'R2', 'U"2', 'S"', 'D', 'L', 'S2', 'M"2', 'R2']
+    # ff = ['E"2', 'B2', 'R2', 'U"2', 'S"', 'D', 'L', 'S2', 'M"2', 'R2']
     v_cube = init_cube()
     ff = _scramble(10)
     print(ff)
@@ -331,3 +349,7 @@ if __name__ == '__main__':
     #     v_cube_state = calc_cube_state(v_cube)
     #     show_text(v_cube), show_text(v_cube_state), print(calc_cube_done(v_cube_state))
     print(check_solve(v_cube))
+    v_cube_turn = []
+    for ind in range(0, len(vTurn)):
+        v_cube_turn.append(vTurn[ind])
+
