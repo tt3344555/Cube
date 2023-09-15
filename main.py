@@ -24,24 +24,24 @@ vCubes = [(7, 12, 19), (18, 25, 46), (1, 10, 39), (45, 16, 52),
 
 vTurn = ['R', 'L', 'F', 'B', 'U', 'D', 'R"', 'L"', 'F"', 'B"', 'U"', 'D"', 'R2', 'L2', 'F2', 'B2', 'U2', 'D2']
 vTurns = 'R L F B U D R" L" F" B" U" D" R2 L2 F2 B2 U2 D2'
-vTurnsNext = {'R':'F B U D F" B" U" D" F2 B2 U2 D2',
-              'L':'F B U D F" B" U" D" F2 B2 U2 D2',
-              'F':'R L U D R" L" U" D" R2 L2 U2 D2',
-              'B':'R L U D R" L" U" D" R2 L2 U2 D2',
-              'U':'R L F B R" L" F" B" R2 L2 F2 B2',
-              'D':'R L F B R" L" F" B" R2 L2 F2 B2',
-              'R"':'F B U D F" B" U" D" F2 B2 U2 D2',
-              'L"':'F B U D F" B" U" D" F2 B2 U2 D2',
-              'F"':'R L U D R" L" U" D" R2 L2 U2 D2',
-              'B"':'R L U D R" L" U" D" R2 L2 U2 D2',
-              'U"':'R L F B R" L" F" B" R2 L2 F2 B2',
-              'D"':'R L F B R" L" F" B" R2 L2 F2 B2',
-              'R2':'F B U D F" B" U" D" F2 B2 U2 D2',
-              'L2':'F B U D F" B" U" D" F2 B2 U2 D2',
-              'F2':'R L U D R" L" U" D" R2 L2 U2 D2',
-              'B2':'R L U D R" L" U" D" R2 L2 U2 D2',
-              'U2':'R L F B R" L" F" B" R2 L2 F2 B2',
-              'D2':'R L F B R" L" F" B" R2 L2 F2 B2'}
+vTurnsNext = {'R':'L F B U D L" F" B" U" D" L2 F2 B2 U2 D2',
+              'L':'R F B U D R" F" B" U" D" R2 F2 B2 U2 D2',
+              'F':'R L B U D R" L" B" U" D" R2 L2 B2 U2 D2',
+              'B':'R L F U D R" L" F" U" D" R2 L2 F2 U2 D2',
+              'U':'R L F B D R" L" F" B" D" R2 L2 F2 B2 D2',
+              'D':'R L F B U R" L" F" B" U" R2 L2 F2 B2 U2',
+              'R"':'L F B U D L" F" B" U" D" L2 F2 B2 U2 D2',
+              'L"':'R F B U D R" F" B" U" D" R2 F2 B2 U2 D2',
+              'F"':'R L B U D R" L" B" U" D" R2 L2 B2 U2 D2',
+              'B"':'R L F U D R" L" F" U" D" R2 L2 F2 U2 D2',
+              'U"':'R L F B D R" L" F" B" D" R2 L2 F2 B2 D2',
+              'D"':'R L F B U R" L" F" B" U" R2 L2 F2 B2 U2',
+              'R2':'L F B U D L" F" B" U" D" L2 F2 B2 U2 D2',
+              'L2':'R F B U D R" F" B" U" D" R2 F2 B2 U2 D2',
+              'F2':'R L B U D R" L" B" U" D" R2 L2 B2 U2 D2',
+              'B2':'R L F U D R" L" F" U" D" R2 L2 F2 U2 D2',
+              'U2':'R L F B D R" L" F" B" D" R2 L2 F2 B2 D2',
+              'D2':'R L F B U R" L" F" B" U" R2 L2 F2 B2 U2'}
 
 def show_sides(v_cube_side: str):
     fside = get_side(v_cube_side, 'front')
