@@ -443,14 +443,14 @@ def find_solve_2(v_cube: str, v_formula: str, v_turns: str):
     # global vTurns
     global vDone
     if vDone == True:
-        exit(0)
+        return (0)
+        # exit(0)
     else:
         if check_solve(formula(v_cube, v_formula)) == True:
             vDone = True
             print('Solve.')
             print(v_formula)
-            return 0
-            exit(0)
+            return (0)
         # v_cube_done = calc_cube_done(calc_cube_state(formula(v_cube, v_formula)))
         v_formula_list = v_formula.split(' ')
         v_depth = len(v_formula_list)
@@ -469,7 +469,7 @@ def find_solve_2(v_cube: str, v_formula: str, v_turns: str):
             v_turns_next = vTurnsNext[v_next_move]
             find_solve_2(v_cube, v_formula_new, v_turns_next)
             if vDone == True:
-                exit(0)
+                return (0)
             else:
                 v_turns_new_list = v_turns_new.split(' ')
                 v_turns_new_list.__delitem__(v_turns_new_list.index(v_next_move))
@@ -495,5 +495,12 @@ if __name__ == '__main__':
     #     show_text(v_cube), show_text(v_cube_state), print(calc_cube_done(v_cube_state))
     print(check_solve(v_cube))
     find_solve_2(v_cube, '', vTurns)
+    print('cube')
+    print(ff)
+    show_sides(v_cube)
+    print('cube:  ', end=' '), show_text(v_cube),
+    print('state: ', end=' '), show_text(v_cube_state),
+    print('cubes done: ', v_cube_done)
+
     # print((check_solve(v_cube)))
 
