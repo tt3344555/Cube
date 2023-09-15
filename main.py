@@ -408,15 +408,16 @@ def find_next_move_2(v_cube: str, v_formula: str, v_turns: str) -> str:
     v_turn_list = v_turns.split(' ')
     v_cube = formula(v_cube, v_formula)
     v_cube_done = calc_cube_done(calc_cube_state(v_cube))
-    v_cube_done_new_max = v_cube_done
     v_next_move = ''
     for ind in range(0, len(v_turn_list)):
         if v_turn_list[ind] != 'X':
             v_cube_done_new = calc_cube_done(calc_cube_state(formula(v_cube, str(v_turn_list[ind]))))
-            if (v_cube_done_new >= v_cube_done_new_max) and (v_cube_done_new > 0):
+            # if (v_cube_done_new > v_cube_done_new_max) and (v_cube_done_new > 0):
+            #     v_next_move = str(v_turn_list[ind])
+            #     v_cube_done_new_max = v_cube_done_new
+            if (v_cube_done_new > v_cube_done) and (v_cube_done_new > 0):
                 v_next_move = str(v_turn_list[ind])
-                v_cube_done_new_max = v_cube_done_new
-    return v_next_move
+                return v_next_move
 
 
 
@@ -440,9 +441,7 @@ def find_solve_2(v_cube: str, v_formula: str, v_turns: str):
     while (find_next_move_2(v_cube, v_formula, v_turns) != '') and (v_depth < 30):
         v_next_move = find_next_move_2(v_cube, v_formula, v_turns)
         v_formula_new = v_formula+' '+v_next_move
-        v_turns_new_list = vTurns.split(' ')
-        v_turns_new_list[v_turns_new_list.index(v_next_move)] = 'X'
-        v_turns_new = _to_str_split(v_turns_new_list)
+        v_turns_new = vTurnsNext[v_next_move]
         find_solve_2(v_cube, v_formula_new, v_turns_new)
         v_turns_list[v_turns_list.index(v_next_move)] = 'X'
         v_turns = _to_str_split(v_turns_list)
