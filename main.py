@@ -468,9 +468,12 @@ def find_solve_2(v_cube: str, v_formula: str, v_turns: str):
             print ('while: ', v_cube,' - ', v_formula_new, ' - ', v_turns_new)
             v_turns_next = vTurnsNext[v_next_move]
             find_solve_2(v_cube, v_formula_new, v_turns_next)
-            v_turns_new_list = v_turns_new.split(' ')
-            v_turns_new_list.__delitem__(v_turns_new_list.index(v_next_move))
-            v_turns_new = _to_str_split(v_turns_new_list)
+            if vDone == True:
+                exit(0)
+            else:
+                v_turns_new_list = v_turns_new.split(' ')
+                v_turns_new_list.__delitem__(v_turns_new_list.index(v_next_move))
+                v_turns_new = _to_str_split(v_turns_new_list)
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
