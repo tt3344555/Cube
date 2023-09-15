@@ -6,6 +6,12 @@ dTurn = ['clock', 'unclock']
 vCube = 'OOOOOOOOO.RRRRRRRRR.GGGGGGGGG.BBBBBBBBB.WWWWWWWWW.YYYYYYYYY.'
 
 
+def check_solve() -> bool:
+    global vCube
+    res = vCube == 'OOOOOOOOO.RRRRRRRRR.GGGGGGGGG.BBBBBBBBB.WWWWWWWWW.YYYYYYYYY.'
+    return res
+
+
 def get_side(side: str) -> str:
     global vCube
     if side in ('front', 'back', 'left', 'right', 'down', 'up'):
@@ -185,5 +191,12 @@ if __name__ == '__main__':
        move_left_clock()
        move_back_unclock()
        move_left_unclock()
-
     print(vCube)
+    print(check_solve())
+
+a1 = '1'
+a2 = '2'
+a3 = '3'
+a = (a1, a2, a3)
+print(a)
+
