@@ -410,9 +410,9 @@ def find_solve_2(v_cube: str, v_formula: str, v_turns: str):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    # ff = ['U F R F R']
+    ff = 'U F R U F'
     v_cube = init_cube()
-    ff = scramble_turns(5, 'U F R')
+    # ff = scramble_turns(5, 'U F R')
     print(ff)
     v_cube = formula(v_cube, ff)
     v_cube_state = calc_cube_state(v_cube)
