@@ -74,12 +74,9 @@ def init_cube() -> str:
     return vCubeSide
 
 
-def init_state() -> str:
-    return '.000010000000010000000010000000010000000010000000010000'
-
-
 def check_solve(v_cube) -> bool:
-    res = (v_cube == '.YYYYYYYYYGGGGGGGGGOOOOOOOOOBBBBBBBBBRRRRRRRRRWWWWWWWWW')
+    global vCubeSide
+    res = (v_cube == vCubeSide)
     return res
 
 
@@ -353,8 +350,8 @@ def scramble(count: int) -> str:
     return _to_str_split(ff)
 
 
-def scramble_turns(count: int, v_turs:str) -> str:
-    v_turns_list = v_turs.split(' ')
+def scramble_turns(count: int, v_turns: str) -> str:
+    v_turns_list = v_turns.split(' ')
     ff = []
     for ind in range(0, count):
         ff.append(v_turns_list[round((len(v_turns_list) - 1) * random())])
@@ -441,7 +438,6 @@ if __name__ == '__main__':
     # print('cube:  ', end=' '), show_text(v_cube),
     # print('state: ', end=' '), show_text(v_cube_state),
     # print('cubes done: ', v_cube_done)
-
     # print((check_solve(v_cube)))
     print()
 
