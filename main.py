@@ -332,8 +332,9 @@ def calc_cube_state(v_cube: str) -> str:
     return v_cube_state
 
 
-def calc_cube_done(v_cube_state: str) -> int:
+def calc_cube_done(v_cube: str) -> int:
     v_done = 0
+    v_cube_state = calc_cube_state(v_cube)
     for ind in range(0, len(vCubes)):
         v_done_cube = 1
         v_cubes_item = vCubes.__getitem__(ind)
@@ -363,10 +364,10 @@ def scramble_turns(count: int, v_turs:str) -> str:
 def find_next_move_2(v_cube: str, v_formula: str, v_turns: str, v_delta: int) -> str:
     v_turn_list = v_turns.split(' ')
     v_cube = formula(v_cube, v_formula)
-    v_cube_done = calc_cube_done(calc_cube_state(v_cube))
+    v_cube_done = calc_cube_done(v_cube)
     v_next_move = ''
     for ind in range(0, len(v_turn_list)):
-        v_cube_done_new = calc_cube_done(calc_cube_state(formula(v_cube, str(v_turn_list[ind]))))
+        v_cube_done_new = calc_cube_done(formula(v_cube, str(v_turn_list[ind])))
         if (v_cube_done_new >= v_cube_done - v_delta) and (v_cube_done_new > 0):
             v_next_move = str(v_turn_list[ind])
             break
@@ -375,11 +376,11 @@ def find_next_move_2(v_cube: str, v_formula: str, v_turns: str, v_delta: int) ->
 def find_next_turns_2(v_cube: str, v_formula: str, v_turns: str, v_delta) -> str:
     v_turns_list = v_turns.split(' ')
     v_cube = formula(v_cube, v_formula)
-    v_cube_done = calc_cube_done(calc_cube_state(v_cube))
+    v_cube_done = calc_cube_done(v_cube)
     v_turns_new_list = []
     for ind in range(0, len(v_turns_list)):
         sind = str(v_turns_list[ind])
-        cc = calc_cube_done(calc_cube_state(formula(v_cube, sind)))
+        cc = calc_cube_done(formula(v_cube, sind))
         if (cc >= v_cube_done - v_delta):
             v_turns_new_list.append(sind)
     v_turns_new = _to_str_split(v_turns_new_list)
