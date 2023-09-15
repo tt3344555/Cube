@@ -23,24 +23,24 @@ vCubes = [(7, 12, 19), (18, 25, 46), (1, 10, 39), (45, 16, 52),
 
 vTurn = ['R', 'L', 'F', 'B', 'U', 'D', 'R"', 'L"', 'F"', 'B"', 'U"', 'D"', 'R2', 'L2', 'F2', 'B2', 'U2', 'D2']
 vTurns = 'R L F B U D R" L" F" B" U" D" R2 L2 F2 B2 U2 D2'
-vTurnsNext = {'R':'L F B U D L" F" B" U" D" L2 F2 B2 U2 D2',
-              'L':'R F B U D R" F" B" U" D" R2 F2 B2 U2 D2',
-              'F':'R L B U D R" L" B" U" D" R2 L2 B2 U2 D2',
-              'B':'R L F U D R" L" F" U" D" R2 L2 F2 U2 D2',
-              'U':'R L F B D R" L" F" B" D" R2 L2 F2 B2 D2',
-              'D':'R L F B U R" L" F" B" U" R2 L2 F2 B2 U2',
-              'R"':'L F B U D L" F" B" U" D" L2 F2 B2 U2 D2',
-              'L"':'R F B U D R" F" B" U" D" R2 F2 B2 U2 D2',
-              'F"':'R L B U D R" L" B" U" D" R2 L2 B2 U2 D2',
-              'B"':'R L F U D R" L" F" U" D" R2 L2 F2 U2 D2',
-              'U"':'R L F B D R" L" F" B" D" R2 L2 F2 B2 D2',
-              'D"':'R L F B U R" L" F" B" U" R2 L2 F2 B2 U2',
-              'R2':'L F B U D L" F" B" U" D" L2 F2 B2 U2 D2',
-              'L2':'R F B U D R" F" B" U" D" R2 F2 B2 U2 D2',
-              'F2':'R L B U D R" L" B" U" D" R2 L2 B2 U2 D2',
-              'B2':'R L F U D R" L" F" U" D" R2 L2 F2 U2 D2',
-              'U2':'R L F B D R" L" F" B" D" R2 L2 F2 B2 D2',
-              'D2':'R L F B U R" L" F" B" U" R2 L2 F2 B2 U2'}
+vTurnsNext = {'R':'F B U D F" B" U" D" F2 B2 U2 D2',
+              'L':'F B U D F" B" U" D" F2 B2 U2 D2',
+              'F':'R L U D R" L" U" D" R2 L2 U2 D2',
+              'B':'R L U D R" L" U" D" R2 L2 U2 D2',
+              'U':'R L F B R" L" F" B" R2 L2 F2 B2',
+              'D':'R L F B R" L" F" B" R2 L2 F2 B2',
+              'R"':'F B U D F" B" U" D" F2 B2 U2 D2',
+              'L"':'F B U D F" B" U" D" F2 B2 U2 D2',
+              'F"':'R L U D R" L" U" D" R2 L2 U2 D2',
+              'B"':'R L U D R" L" U" D" R2 L2 U2 D2',
+              'U"':'R L F B R" L" F" B" R2 L2 F2 B2',
+              'D"':'R L F B R" L" F" B" R2 L2 F2 B2',
+              'R2':'F B U D F" B" U" D" F2 B2 U2 D2',
+              'L2':'F B U D F" B" U" D" F2 B2 U2 D2',
+              'F2':'R L U D R" L" U" D" R2 L2 U2 D2',
+              'B2':'R L U D R" L" U" D" R2 L2 U2 D2',
+              'U2':'R L F B R" L" F" B" R2 L2 F2 B2',
+              'D2':'R L F B R" L" F" B" R2 L2 F2 B2'}
 
 def show_sides(v_cube_side: str):
     fside = get_side(v_cube_side, 'front')
@@ -358,29 +358,31 @@ def scramble_turns(count: int, v_turs:str) -> str:
     return _to_str_split(ff)
 
 
-def find_next_move_2(v_cube: str, v_formula: str, v_turns: str) -> str:
+def find_next_move_2(v_cube: str, v_formula: str, v_turns: str, v_delta: int) -> str:
     v_turn_list = v_turns.split(' ')
     v_cube = formula(v_cube, v_formula)
     v_cube_done = calc_cube_done(calc_cube_state(v_cube))
     v_next_move = ''
     for ind in range(0, len(v_turn_list)):
-        if v_turn_list[ind] != 'X':
-            v_cube_done_new = calc_cube_done(calc_cube_state(formula(v_cube, str(v_turn_list[ind]))))
-            if (v_cube_done_new >= v_cube_done) and (v_cube_done_new > 0):
-                v_next_move = str(v_turn_list[ind])
+        v_cube_done_new = calc_cube_done(calc_cube_state(formula(v_cube, str(v_turn_list[ind]))))
+        if (v_cube_done_new >= v_cube_done - v_delta) and (v_cube_done_new > 0):
+            v_next_move = str(v_turn_list[ind])
+            break
     return v_next_move
 
-def find_next_turns_2(v_cube: str, v_formula: str, v_turns: str) -> str:
+def find_next_turns_2(v_cube: str, v_formula: str, v_turns: str, v_delta) -> str:
     v_turns_list = v_turns.split(' ')
     v_cube = formula(v_cube, v_formula)
     v_cube_done = calc_cube_done(calc_cube_state(v_cube))
     v_turns_new_list = []
     for ind in range(0, len(v_turns_list)):
         sind = str(v_turns_list[ind])
-        if calc_cube_done(calc_cube_state(formula(v_cube, sind))) >= v_cube_done:
+        cc = calc_cube_done(calc_cube_state(formula(v_cube, sind)))
+        if (cc >= v_cube_done - v_delta):
             v_turns_new_list.append(sind)
     v_turns_new = _to_str_split(v_turns_new_list)
     return v_turns_new
+
 
 def find_solve_2(v_cube: str, v_formula: str, v_turns: str):
     global vDone
@@ -394,10 +396,10 @@ def find_solve_2(v_cube: str, v_formula: str, v_turns: str):
             return (0)
         v_formula_list = v_formula.split(' ')
         v_depth = len(v_formula_list)
-        v_turns_new = find_next_turns_2(v_cube, v_formula, v_turns)
-        print('find: ', v_depth, v_cube, ' - ', v_formula, ' - ', v_turns_new)
-        while (find_next_move_2(v_cube, v_formula, v_turns_new) != '') and (v_depth < 7):
-            v_next_move = find_next_move_2(v_cube, v_formula, v_turns_new)
+        v_turns_new = find_next_turns_2(v_cube, v_formula, v_turns, 5)
+        if v_depth <= 3: print('find: ', v_depth, v_cube, ' - ', v_formula, ' - ', v_turns_new)
+        while (v_turns_new != '') and (v_depth < 7):
+            v_next_move = str(v_turns_new.split(' ').__getitem__(0))
             v_formula_new = v_formula+' '+v_next_move
             v_turns_next = vTurnsNext[v_next_move]
             find_solve_2(v_cube, v_formula_new, v_turns_next)
@@ -410,7 +412,7 @@ def find_solve_2(v_cube: str, v_formula: str, v_turns: str):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    ff = 'U F R F U'
+    ff = 'U F R F" U'
     v_cube = init_cube()
     # ff = scramble_turns(5, 'U F R')
     print(ff)
@@ -427,9 +429,10 @@ if __name__ == '__main__':
     #     v_cube_state = calc_cube_state(v_cube)
     #     show_text(v_cube), show_text(v_cube_state), print(calc_cube_done(v_cube_state))
     print(check_solve(v_cube))
-    find_solve_2(v_cube, '', vTurns)
+    find_solve_2(v_cube, '', 'F F" U U" R R"')
     print('cube scramble')
     print(ff)
+    print(v_cube)
     # show_sides(v_cube)
     # print('cube:  ', end=' '), show_text(v_cube),
     # print('state: ', end=' '), show_text(v_cube_state),
