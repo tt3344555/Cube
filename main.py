@@ -5,6 +5,7 @@ from random import random
 # sys.setrecursionlimit(5000)
 
 vCubeSide = '.YYYYYYYYYGGGGGGGGGOOOOOOOOOBBBBBBBBBRRRRRRRRRWWWWWWWWW'
+# vCubeSide = '.000000000111111111222222222333333333444444444555555555'
 vSide = {'up': 0, 'left': 1, 'front': 2, 'right': 3, 'back': 4, 'down': 5}
 vCubeState = '.0000X00000000X00000000X00000000X00000000X00000000X0000'
 vDone = False
@@ -69,7 +70,8 @@ def show_text(v_cube: str):
 
 
 def init_cube() -> str:
-    return '.YYYYYYYYYGGGGGGGGGOOOOOOOOOBBBBBBBBBRRRRRRRRRWWWWWWWWW'
+    global vCubeSide
+    return vCubeSide
 
 
 def init_state() -> str:
@@ -412,9 +414,10 @@ def find_solve_2(v_cube: str, v_formula: str, v_turns: str):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    ff = 'U F R F" U'
+    # ff = 'U F R F" U'
     v_cube = init_cube()
     # ff = scramble_turns(5, 'U F R')
+    ff = scramble(5)
     print(ff)
     v_cube = formula(v_cube, ff)
     v_cube_state = calc_cube_state(v_cube)
@@ -429,7 +432,7 @@ if __name__ == '__main__':
     #     v_cube_state = calc_cube_state(v_cube)
     #     show_text(v_cube), show_text(v_cube_state), print(calc_cube_done(v_cube_state))
     print(check_solve(v_cube))
-    find_solve_2(v_cube, '', 'F F" U U" R R"')
+    find_solve_2(v_cube, '', vTurns)
     print('cube scramble')
     print(ff)
     print(v_cube)
