@@ -55,12 +55,14 @@ def check_solve(v_cube) -> bool:
     return res
 
 
+
 def get_side(v_cube, side: str) -> str:
     if side in ('front', 'back', 'left', 'right', 'down', 'up'):
         res = v_cube[vSide[side] * 9 + 1:vSide[side] * 9 + 10]
+
         return res
     else:
-        print('get_side: error: set side: front, back, left, right, down, top')
+        print('get_side: error: side value: front, back, left, right, down, top')
         exit(1)
 
 
@@ -72,6 +74,8 @@ def _change_elements(v_cube: str, ind1, ind2, ind3, ind4: int) -> str:
     v_cube_list[ind2] = v_cube_list[ind1]
     v_cube_list[ind1] = ind4str
     return _to_str(v_cube_list)
+
+
 
 
 def _to_str(side: list) -> str:
@@ -122,7 +126,7 @@ def move_b_cc(v_cube: str, count: int):
         v_cube = _change_elements(v_cube, 2, 33, 53, 13)
         v_cube = _change_elements(v_cube, 3, 36, 52, 10)
     return v_cube
-
+  
 
 # left
 def move_l(v_cube: str, count: int):
