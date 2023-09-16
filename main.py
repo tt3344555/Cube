@@ -439,5 +439,4 @@ if __name__ == '__main__':
     # print('state: ', end=' '), show_text(v_cube_state),
     # print('cubes done: ', v_cube_done)
     # print((check_solve(v_cube)))
-    print()
 
