@@ -17,7 +17,7 @@ g_cubes_side = '.YYYYYYYYYGGGGGGGGGOOOOOOOOOBBBBBBBBBRRRRRRRRRWWWWWWWWW'
 g_side = {'up': 0, 'left': 1, 'front': 2, 'right': 3, 'back': 4, 'down': 5}
 # g_cube_state = '.0000X00000000X00000000X00000000X00000000X00000000X0000'
 g_done = False
-g_cube = '.YYYYYYYYYGGGGGGGGGOOOOOOOOOBBBBBBBBBRRRRRRRRRWWWWWWWWW'
+g_cube = '.YYYYYYYYYBBBBBBBBBRRRRRRRRRGGGGGGGGGOOOOOOOOOWWWWWWWWW'
 
 g_cubes = [(7, 12, 19), (18, 25, 46), (1, 10, 39), (45, 16, 52),
           (21, 28, 9), (27, 34, 48), (3, 30, 37), (54, 36, 43),
@@ -614,16 +614,16 @@ def draw_cube_faces_update():
 def draw_scramble():
     global g_cube
     ff = []
-    ff = scramble(50)
+    ff = scramble(5)
     g_cube = init_cube()
     g_cube = formula(g_cube, ff)
-    display.delete("1.0", "end")
-    display.insert(INSERT, _to_str_split(ff)+'\n')
+    text1.delete("1.0", "end")
+    text1.insert(INSERT, _to_str_split(ff)+'\n')
     draw_cube_faces_update()
 
-def draw_front():
+def draw_move(v_move: str):
     global g_cube
-    g_cube = move_f(g_cube, 1)
+    g_cube = formula(g_cube, v_move)
     draw_cube_faces_update()
 
 
@@ -639,26 +639,57 @@ if __name__ == '__main__':
     v_cube_done = calc_cube_done(v_cube_state)
     # show_sides(v_cube)
     print('cube:  ', end=' '), show_text(v_cube),
-    print('state: ', end=' '), show_text(v_cube_state),
-    print('cubes done: ', v_cube_done)
-    # while not check_solve(v_cube):
-    #     i += 1
-    #     v_cube = _formula(v_cube, ff)
-    #     v_cube_state = calc_cube_state(v_cube)
-    #     show_text(v_cube), show_text(v_cube_state), print(calc_cube_done(v_cube_state))
-    print(check_solve(v_cube))
+    # print('state: ', end=' '), show_text(v_cube_state),
+    # print('cubes done: ', v_cube_done)
+    # print(check_solve(v_cube))
     root = Tk()
     root.wm_title('Cube example')
     v_canvas = Canvas(root, width=g_faces_cube_width * 18 + 30, height=g_faces_cube_width*9 + 30)
     v_canvas.pack()
 
-    bfront = Button(text="F", height=2, width=4, relief=RAISED, command=draw_front)
-    bfront_window = v_canvas.create_window(10 + 12 * g_faces_cube_width, 10 + 0.1 * g_faces_cube_width, anchor=NW, window=bfront)
+    bfront = Button(text="F", height=2, width=4, relief=RAISED, command=lambda:draw_move('F'))
+    bfront_window = v_canvas.create_window(10 + 12.5 * g_faces_cube_width, 10 , anchor=NW, window=bfront)
+    bright = Button(text="R", height=2, width=4, relief=RAISED, command=lambda:draw_move('R'))
+    bright_window = v_canvas.create_window(10 + 13.2 * g_faces_cube_width, 10 , anchor=NW, window=bright)
+    bup = Button(text="U", height=2, width=4, relief=RAISED, command=lambda:draw_move('U'))
+    bup_window = v_canvas.create_window(10 + 13.9 * g_faces_cube_width, 10 , anchor=NW, window=bup)
+    bback = Button(text="B", height=2, width=4, relief=RAISED, command=lambda:draw_move('B'))
+    bback_window = v_canvas.create_window(10 + 14.6 * g_faces_cube_width, 10 , anchor=NW, window=bback)
+    bleft = Button(text="L", height=2, width=4, relief=RAISED, command=lambda:draw_move('L'))
+    bleft_window = v_canvas.create_window(10 + 15.3 * g_faces_cube_width, 10 , anchor=NW, window=bleft)
+    bdown = Button(text="D", height=2, width=4, relief=RAISED, command=lambda:draw_move('D'))
+    bdown_window = v_canvas.create_window(10 + 16.0 * g_faces_cube_width, 10 , anchor=NW, window=bdown)
+
+    bfrontcc = Button(text="F'", height=2, width=4, relief=RAISED, command=lambda:draw_move('F"'))
+    bfrontcc_window = v_canvas.create_window(10 + 12.5 * g_faces_cube_width, 10 + .7 * g_faces_cube_width, anchor=NW, window=bfrontcc)
+    brightcc = Button(text="R'", height=2, width=4, relief=RAISED, command=lambda:draw_move('R"'))
+    brightcc_window = v_canvas.create_window(10 + 13.2 * g_faces_cube_width, 10 + .7 * g_faces_cube_width, anchor=NW, window=brightcc)
+    bupcc = Button(text="U'", height=2, width=4, relief=RAISED, command=lambda:draw_move('U"'))
+    bupcc_window = v_canvas.create_window(10 + 13.9 * g_faces_cube_width, 10 + .7 * g_faces_cube_width, anchor=NW, window=bupcc)
+    bbackcc = Button(text="B'", height=2, width=4, relief=RAISED, command=lambda:draw_move('B"'))
+    bbackcc_window = v_canvas.create_window(10 + 14.6 * g_faces_cube_width, 10 + .7 * g_faces_cube_width, anchor=NW, window=bbackcc)
+    bleftcc = Button(text="L'", height=2, width=4, relief=RAISED, command=lambda:draw_move('L"'))
+    bleftcc_window = v_canvas.create_window(10 + 15.3 * g_faces_cube_width, 10 + .7 * g_faces_cube_width, anchor=NW, window=bleftcc)
+    bdowncc = Button(text="D'", height=2, width=4, relief=RAISED, command=lambda:draw_move('D"'))
+    bdowncc_window = v_canvas.create_window(10 + 16.0 * g_faces_cube_width, 10 + .7 * g_faces_cube_width, anchor=NW, window=bdowncc)
+
+    bfront2 = Button(text="F2", height=2, width=4, relief=RAISED, command=lambda:draw_move('F2'))
+    bfront2_window = v_canvas.create_window(10 + 12.5 * g_faces_cube_width, 10 + 1.4 * g_faces_cube_width, anchor=NW, window=bfront2)
+    bright2 = Button(text="R2", height=2, width=4, relief=RAISED, command=lambda:draw_move('R2'))
+    bright2_window = v_canvas.create_window(10 + 13.2 * g_faces_cube_width, 10 + 1.4 * g_faces_cube_width, anchor=NW, window=bright2)
+    bup2 = Button(text="U2", height=2, width=4, relief=RAISED, command=lambda:draw_move('U2'))
+    bup2_window = v_canvas.create_window(10 + 13.9 * g_faces_cube_width, 10 + 1.4 * g_faces_cube_width, anchor=NW, window=bup2)
+    bback2 = Button(text="B2", height=2, width=4, relief=RAISED, command=lambda:draw_move('B2'))
+    bback2_window = v_canvas.create_window(10 + 14.6 * g_faces_cube_width, 10 + 1.4 * g_faces_cube_width, anchor=NW, window=bback2)
+    bleft2 = Button(text="L2", height=2, width=4, relief=RAISED, command=lambda:draw_move('L2'))
+    bleft2_window = v_canvas.create_window(10 + 15.3 * g_faces_cube_width, 10 + 1.4 * g_faces_cube_width, anchor=NW, window=bleft2)
+    bdown2 = Button(text="D2", height=2, width=4, relief=RAISED, command=lambda:draw_move('D2'))
+    bdown2_window = v_canvas.create_window(10 + 16.0 * g_faces_cube_width, 10 + 1.4 * g_faces_cube_width, anchor=NW, window=bdown2)
 
     bnewcubfaces = Button(text="Scramble", height=2, width=10, relief=RAISED, command=draw_scramble)
     bnewcubfaces_window  = v_canvas.create_window(10 + 10.5 * g_faces_cube_width, 10 + 6.5 * g_faces_cube_width, anchor=NW, window=bnewcubfaces)
-    display = Text(height=7, width=39)
-    text_window = v_canvas.create_window(10 + 6.5 * g_faces_cube_width, 10 + .5 * g_faces_cube_width, anchor=NW, window=display)
+    text1 = Text(height=7, width=39)
+    text_window = v_canvas.create_window(10 + 6.2 * g_faces_cube_width, 10 , anchor=NW, window=text1)
     # display.insert(INSERT, g_cube)
 
     draw_cube_faces(g_cube)
