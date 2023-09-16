@@ -22,26 +22,36 @@ vCubes = [(7, 12, 19), (18, 25, 46), (1, 10, 39), (45, 16, 52),
 #          'R2', 'L2', 'F2', 'B2', 'U2', 'D2',
 #          'M', 'E', 'S', 'M"', 'E"', 'S"', 'M2', 'E2', 'S2', 'M"2', 'E"2', 'S"2']
 
-vTurn = ['R', 'L', 'F', 'B', 'U', 'D', 'R"', 'L"', 'F"', 'B"', 'U"', 'D"', 'R2', 'L2', 'F2', 'B2', 'U2', 'D2']
-vTurns = 'R L F B U D R" L" F" B" U" D" R2 L2 F2 B2 U2 D2'
-vTurnsNext = {'R':'L F B U D L" F" B" U" D" L2 F2 B2 U2 D2',
-              'L':'R F B U D R" F" B" U" D" R2 F2 B2 U2 D2',
-              'F':'R L B U D R" L" B" U" D" R2 L2 B2 U2 D2',
-              'B':'R L F U D R" L" F" U" D" R2 L2 F2 U2 D2',
-              'U':'R L F B D R" L" F" B" D" R2 L2 F2 B2 D2',
-              'D':'R L F B U R" L" F" B" U" R2 L2 F2 B2 U2',
-              'R"':'L F B U D L" F" B" U" D" L2 F2 B2 U2 D2',
-              'L"':'R F B U D R" F" B" U" D" R2 F2 B2 U2 D2',
-              'F"':'R L B U D R" L" B" U" D" R2 L2 B2 U2 D2',
-              'B"':'R L F U D R" L" F" U" D" R2 L2 F2 U2 D2',
-              'U"':'R L F B D R" L" F" B" D" R2 L2 F2 B2 D2',
-              'D"':'R L F B U R" L" F" B" U" R2 L2 F2 B2 U2',
-              'R2':'L F B U D L" F" B" U" D" L2 F2 B2 U2 D2',
-              'L2':'R F B U D R" F" B" U" D" R2 F2 B2 U2 D2',
-              'F2':'R L B U D R" L" B" U" D" R2 L2 B2 U2 D2',
-              'B2':'R L F U D R" L" F" U" D" R2 L2 F2 U2 D2',
-              'U2':'R L F B D R" L" F" B" D" R2 L2 F2 B2 D2',
-              'D2':'R L F B U R" L" F" B" U" R2 L2 F2 B2 U2'}
+# vTurn = ['R', 'L', 'F', 'B', 'U', 'D', 'R"', 'L"', 'F"', 'B"', 'U"', 'D"', 'R2', 'L2', 'F2', 'B2', 'U2', 'D2']
+# vTurns = 'R L F B U D R" L" F" B" U" D" R2 L2 F2 B2 U2 D2'
+# vTurnsNext = {'R':'L F B U D L" F" B" U" D" L2 F2 B2 U2 D2',
+#               'L':'R F B U D R" F" B" U" D" R2 F2 B2 U2 D2',
+#               'F':'R L B U D R" L" B" U" D" R2 L2 B2 U2 D2',
+#               'B':'R L F U D R" L" F" U" D" R2 L2 F2 U2 D2',
+#               'U':'R L F B D R" L" F" B" D" R2 L2 F2 B2 D2',
+#               'D':'R L F B U R" L" F" B" U" R2 L2 F2 B2 U2',
+#               'R"':'L F B U D L" F" B" U" D" L2 F2 B2 U2 D2',
+#               'L"':'R F B U D R" F" B" U" D" R2 F2 B2 U2 D2',
+#               'F"':'R L B U D R" L" B" U" D" R2 L2 B2 U2 D2',
+#               'B"':'R L F U D R" L" F" U" D" R2 L2 F2 U2 D2',
+#               'U"':'R L F B D R" L" F" B" D" R2 L2 F2 B2 D2',
+#               'D"':'R L F B U R" L" F" B" U" R2 L2 F2 B2 U2',
+#               'R2':'L F B U D L" F" B" U" D" L2 F2 B2 U2 D2',
+#               'L2':'R F B U D R" F" B" U" D" R2 F2 B2 U2 D2',
+#               'F2':'R L B U D R" L" B" U" D" R2 L2 B2 U2 D2',
+#               'B2':'R L F U D R" L" F" U" D" R2 L2 F2 U2 D2',
+#               'U2':'R L F B D R" L" F" B" D" R2 L2 F2 B2 D2',
+#               'D2':'R L F B U R" L" F" B" U" R2 L2 F2 B2 U2'}
+
+vTurnsNextUFR = {'R': 'F U F" U" F2 U2',
+              'F': 'R U R" U" R2 U2',
+              'U': 'R F R" F" R2 F2',
+              'R"': 'F U F" U" F2 U2',
+              'F"': 'R U R" U" R2 U2',
+              'U"': 'R F R" F" R2 F2',
+              'R2': 'F U F" U" F2 U2',
+              'F2': 'R U R" U" R2 U2',
+              'U2': 'R F R" F" R2 F2'}
 
 def show_sides(v_cube_side: str):
     fside = get_side(v_cube_side, 'front')
@@ -384,7 +394,7 @@ def find_next_turns_2(v_cube: str, v_formula: str, v_turns: str, v_delta) -> str
     return v_turns_new
 
 
-def find_solve_2(v_cube: str, v_formula: str, v_turns: str):
+def find_solve_2(v_cube: str, v_formula: str, v_turns: str, v_depth: int):
     global vDone
     if vDone == True:
         return (0)
@@ -395,14 +405,14 @@ def find_solve_2(v_cube: str, v_formula: str, v_turns: str):
             print(v_formula)
             return (0)
         v_formula_list = v_formula.split(' ')
-        v_depth = len(v_formula_list)
-        v_turns_new = find_next_turns_2(v_cube, v_formula, v_turns, 5)
-        if v_depth <= 3: print('find: ', v_depth, v_cube, ' - ', v_formula, ' - ', v_turns_new)
-        while (v_turns_new != '') and (v_depth < 7):
+        v_depth_new = len(v_formula_list)
+        v_turns_new = find_next_turns_2(v_cube, v_formula, v_turns, 1)
+        if v_depth_new <= 3: print('find: ', v_depth_new, v_cube, ' - ', v_formula, ' - ', v_turns_new)
+        while (v_turns_new != '') and (v_depth_new < v_depth):
             v_next_move = str(v_turns_new.split(' ').__getitem__(0))
             v_formula_new = v_formula+' '+v_next_move
-            v_turns_next = v_turns
-            find_solve_2(v_cube, v_formula_new, v_turns_next)
+            v_turns_next = vTurnsNextUFR[v_next_move]
+            find_solve_2(v_cube, v_formula_new, v_turns_next, v_depth_new)
             if vDone == True:
                 return (0)
             else:
@@ -415,7 +425,7 @@ if __name__ == '__main__':
     #UFR combination
     # ff = 'U F R F" U'
     v_cube = init_cube()
-    ff = scramble_turns(5, 'U F R U" F" R" U2 F2 R2')
+    ff = scramble_turns(50, 'U F R U" F" R" U2 F2 R2')
     # ff = scramble(5)
     print(ff)
     v_cube = formula(v_cube, ff)
