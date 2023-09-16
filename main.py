@@ -12,14 +12,14 @@ g_faces_colors = {'Y': "yellow", 'G': "green", 'R': "red", 'W': "white", 'B': "b
 g_faces_offset_x = {'up': 3, 'left': 0, 'front': 3, 'right': 6, 'back': 9, 'down': 3, }
 g_faces_offset_y = {'up': 0, 'left': 3, 'front': 3, 'right': 3, 'back': 3, 'down': 6, }
 
-vCubeSide = '.YYYYYYYYYGGGGGGGGGOOOOOOOOOBBBBBBBBBRRRRRRRRRWWWWWWWWW'
-# vCubeSide = '.000000000111111111222222222333333333444444444555555555'
-vSide = {'up': 0, 'left': 1, 'front': 2, 'right': 3, 'back': 4, 'down': 5}
-vCubeState = '.0000X00000000X00000000X00000000X00000000X00000000X0000'
-vDone = False
+g_cubes_side = '.YYYYYYYYYGGGGGGGGGOOOOOOOOOBBBBBBBBBRRRRRRRRRWWWWWWWWW'
+# g_cube = '.000000000111111111222222222333333333444444444555555555'
+g_side = {'up': 0, 'left': 1, 'front': 2, 'right': 3, 'back': 4, 'down': 5}
+# g_cube_state = '.0000X00000000X00000000X00000000X00000000X00000000X0000'
+g_done = False
 g_cube = '.YYYYYYYYYGGGGGGGGGOOOOOOOOOBBBBBBBBBRRRRRRRRRWWWWWWWWW'
 
-vCubes = [(7, 12, 19), (18, 25, 46), (1, 10, 39), (45, 16, 52),
+g_cubes = [(7, 12, 19), (18, 25, 46), (1, 10, 39), (45, 16, 52),
           (21, 28, 9), (27, 34, 48), (3, 30, 37), (54, 36, 43),
           (24, 31), (20, 8), (22, 15), (26, 47),
           (2, 38), (33, 40), (13, 42), (53, 44),
@@ -71,25 +71,25 @@ def show_sides(v_cube_side: str):
 
 def show_text(v_cube: str):
     for iside in ('up', 'left', 'front', 'right', 'back', 'down'):
-        vside = v_cube[vSide[iside] * 9 + 1: vSide[iside] * 9 + 10]
+        vside = v_cube[g_side[iside] * 9 + 1: g_side[iside] * 9 + 10]
         print(iside, vside, end=' ')
     print('-')
 
 
 def init_cube() -> str:
-    global vCubeSide
-    return vCubeSide
+    global g_cube
+    return g_cube
 
 
 def check_solve(v_cube) -> bool:
-    global vCubeSide
-    res = (v_cube == vCubeSide)
+    global g_cube
+    res = (v_cube == g_cube)
     return res
 
 
 def get_side(v_cube, side: str) -> str:
     if side in ('front', 'back', 'left', 'right', 'down', 'up'):
-        res = v_cube[vSide[side] * 9 + 1:vSide[side] * 9 + 10]
+        res = v_cube[g_side[side] * 9 + 1:g_side[side] * 9 + 10]
         return res
     else:
         print('get_side: error: set side: front, back, left, right, down, top')
@@ -496,8 +496,8 @@ def calc_cube_state(v_cube: str) -> str:
         for j in range(0, 9):
             s = '0'
             if vside[j] == vside[4]: s = '1'
-            v_cube_state_list[vSide[iside] * 9 + j + 1] = s
-        v_cube_state_list[vSide[iside] * 9 + 5] = vside[4]
+            v_cube_state_list[g_side[iside] * 9 + j + 1] = s
+        v_cube_state_list[g_side[iside] * 9 + 5] = vside[4]
     v_cube_state = _to_str(v_cube_state_list)
     return v_cube_state
 
@@ -505,9 +505,9 @@ def calc_cube_state(v_cube: str) -> str:
 def calc_cube_done(v_cube: str) -> int:
     v_done = 0
     v_cube_state = calc_cube_state(v_cube)
-    for ind in range(0, len(vCubes)):
+    for ind in range(0, len(g_cubes)):
         v_done_cube = 1
-        v_cubes_item = vCubes.__getitem__(ind)
+        v_cubes_item = g_cubes.__getitem__(ind)
         for cind in range(0, len(v_cubes_item)):
             if v_cube_state[v_cubes_item.__getitem__(cind)] == '0': v_done_cube = 0
         # if v_done_cube == 1: print(v_cubes_item)
@@ -568,12 +568,12 @@ def find_next_turns_2(v_cube: str, v_formula: str, v_turns: str, v_delta) -> str
 
 
 def find_solve_2(v_cube: str, v_formula: str, v_turns: str):
-    global vDone
-    if vDone == True:
+    global g_done
+    if g_done == True:
         return (0)
     else:
         if check_solve(formula(v_cube, v_formula)) == True:
-            vDone = True
+            g_done = True
             print('Solve.')
             print(v_formula)
             return (0)
@@ -586,7 +586,7 @@ def find_solve_2(v_cube: str, v_formula: str, v_turns: str):
             v_formula_new = v_formula+' '+v_next_move
             v_turns_next = vTurnsNext[v_next_move]
             find_solve_2(v_cube, v_formula_new, v_turns_next)
-            if vDone == True:
+            if g_done == True:
                 return (0)
             else:
                 v_turns_new_list = v_turns_new.split(' ')
@@ -598,9 +598,9 @@ def draw_cube_faces(v_cube: str):
         for cind in range(9):
             v_cube_x = 10 + (cind - (cind // 3) * 3) * g_faces_cube_width + g_faces_offset_x[iside] * g_faces_cube_width
             v_cube_y = 10 + (cind // 3) * g_faces_cube_width + g_faces_offset_y[iside] * g_faces_cube_width
-            g_faces_cube[vSide[iside] * 9 + cind] = v_canvas.create_rectangle(v_cube_x, v_cube_y,
+            g_faces_cube[g_side[iside] * 9 + cind] = v_canvas.create_rectangle(v_cube_x, v_cube_y,
                      v_cube_x + g_faces_cube_width, v_cube_y + g_faces_cube_width,
-                      fill=g_faces_colors[str(v_cube[vSide[iside] * 9 + cind + 1])])
+                      fill=g_faces_colors[str(v_cube[g_side[iside] * 9 + cind + 1])])
             if cind == 4:
                 v_canvas.create_text(v_cube_x + g_faces_cube_width // 2, v_cube_y + g_faces_cube_width // 2,
                                      font=('', 14), text=g_faces_text[iside], state=DISABLED)
