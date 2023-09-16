@@ -401,7 +401,7 @@ def find_solve_2(v_cube: str, v_formula: str, v_turns: str):
         while (v_turns_new != '') and (v_depth < 7):
             v_next_move = str(v_turns_new.split(' ').__getitem__(0))
             v_formula_new = v_formula+' '+v_next_move
-            v_turns_next = vTurnsNext[v_next_move]
+            v_turns_next = v_turns
             find_solve_2(v_cube, v_formula_new, v_turns_next)
             if vDone == True:
                 return (0)
@@ -431,7 +431,7 @@ if __name__ == '__main__':
     #     v_cube_state = calc_cube_state(v_cube)
     #     show_text(v_cube), show_text(v_cube_state), print(calc_cube_done(v_cube_state))
     print(check_solve(v_cube))
-    find_solve_2(v_cube, '', vTurns)
+    find_solve_2(v_cube, '', 'U F R U" F" R" U2 F2 R2')
     print('cube scramble')
     print(ff)
     print(v_cube)
