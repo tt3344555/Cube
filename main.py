@@ -1,16 +1,23 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from tkinter import *
 from random import random
 # import sys
 # sys.setrecursionlimit(5000)
+
+g_faces_cube_width = 60
+g_faces_cube = [0 for ind in range(54)]
+g_faces_text = {'up': 'U', 'left': 'L', 'front': 'F', 'right': 'R', 'back': 'B', 'down': 'D', }
+g_faces_colors = {'Y': "yellow", 'G': "green", 'R': "red", 'W': "white", 'B': "blue", 'O': "orange"}
+g_faces_offset_x = {'up': 3, 'left': 0, 'front': 3, 'right': 6, 'back': 9, 'down': 3, }
+g_faces_offset_y = {'up': 0, 'left': 3, 'front': 3, 'right': 3, 'back': 3, 'down': 6, }
 
 vCubeSide = '.YYYYYYYYYGGGGGGGGGOOOOOOOOOBBBBBBBBBRRRRRRRRRWWWWWWWWW'
 # vCubeSide = '.000000000111111111222222222333333333444444444555555555'
 vSide = {'up': 0, 'left': 1, 'front': 2, 'right': 3, 'back': 4, 'down': 5}
 vCubeState = '.0000X00000000X00000000X00000000X00000000X00000000X0000'
 vDone = False
-recurse = 0
-
+g_cube = '.YYYYYYYYYGGGGGGGGGOOOOOOOOOBBBBBBBBBRRRRRRRRRWWWWWWWWW'
 
 vCubes = [(7, 12, 19), (18, 25, 46), (1, 10, 39), (45, 16, 52),
           (21, 28, 9), (27, 34, 48), (3, 30, 37), (54, 36, 43),
@@ -510,15 +517,21 @@ def calc_cube_done(v_cube: str) -> int:
 
 def scramble(count: int) -> str:
     v_turns_list = vTurns.split(' ')
+    ss = v_turns_list[round((len(v_turns_list) - 1) * random())]
     ff = []
-    for ind in range(0, count):
-        ff.append(v_turns_list[round((len(v_turns_list) - 1) * random())])
+    ff.append(ss)
+    for ind in range(0, count-1):
+        ss = ff.__getitem__(ind)
+        v_turns_list = vTurnsNext[str(ss)].split(' ')
+        ss = v_turns_list[round((len(v_turns_list) - 1) * random())]
+        ff.append(ss)
     return _to_str_split(ff)
 
 
 def scramble_turns(count: int, v_turns: str) -> str:
     v_turns_list = v_turns.split(' ')
     ss = v_turns_list[round((len(v_turns_list) - 1) * random())]
+    ff = []
     ff.append(ss)
     for ind in range(0, count-1):
         ss = ff.__getitem__(ind)
@@ -580,17 +593,51 @@ def find_solve_2(v_cube: str, v_formula: str, v_turns: str):
                 v_turns_new_list.__delitem__(v_turns_new_list.index(v_next_move))
                 v_turns_new = _to_str_split(v_turns_new_list)
 
+def draw_cube_faces(v_cube: str):
+    for iside in ('up', 'left', 'front', 'right', 'back', 'down'):
+        for cind in range(9):
+            v_cube_x = 10 + (cind - (cind // 3) * 3) * g_faces_cube_width + g_faces_offset_x[iside] * g_faces_cube_width
+            v_cube_y = 10 + (cind // 3) * g_faces_cube_width + g_faces_offset_y[iside] * g_faces_cube_width
+            g_faces_cube[vSide[iside] * 9 + cind] = v_canvas.create_rectangle(v_cube_x, v_cube_y,
+                     v_cube_x + g_faces_cube_width, v_cube_y + g_faces_cube_width,
+                      fill=g_faces_colors[str(v_cube[vSide[iside] * 9 + cind + 1])])
+            if cind == 4:
+                v_canvas.create_text(v_cube_x + g_faces_cube_width // 2, v_cube_y + g_faces_cube_width // 2,
+                                     font=('', 14), text=g_faces_text[iside], state=DISABLED)
+
+def draw_cube_faces_update():
+    global g_cube
+    for ind in range(len(g_faces_cube)):
+        v_canvas.itemconfig(g_faces_cube[ind], fill=g_faces_colors[str(g_cube[ind + 1])])
+    # v_canvas.tag_raise(v_canvas.index(ind))
+
+def draw_scramble():
+    global g_cube
+    ff = []
+    ff = scramble(50)
+    g_cube = init_cube()
+    g_cube = formula(g_cube, ff)
+    display.delete("1.0", "end")
+    display.insert(INSERT, _to_str_split(ff)+'\n')
+    draw_cube_faces_update()
+
+def draw_front():
+    global g_cube
+    g_cube = move_f(g_cube, 1)
+    draw_cube_faces_update()
+
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # ff = 'U F R F" U'
     v_cube = init_cube()
     # ff = scramble_turns(5, 'U F R')
-    ff = scramble(5)
+    ff = scramble(3)
     print(ff)
     v_cube = formula(v_cube, ff)
     v_cube_state = calc_cube_state(v_cube)
     v_cube_done = calc_cube_done(v_cube_state)
-    show_sides(v_cube)
+    # show_sides(v_cube)
     print('cube:  ', end=' '), show_text(v_cube),
     print('state: ', end=' '), show_text(v_cube_state),
     print('cubes done: ', v_cube_done)
@@ -600,7 +647,24 @@ if __name__ == '__main__':
     #     v_cube_state = calc_cube_state(v_cube)
     #     show_text(v_cube), show_text(v_cube_state), print(calc_cube_done(v_cube_state))
     print(check_solve(v_cube))
-    find_solve_2(v_cube, '', vTurns)
+    root = Tk()
+    root.wm_title('Cube example')
+    v_canvas = Canvas(root, width=g_faces_cube_width * 18 + 30, height=g_faces_cube_width*9 + 30)
+    v_canvas.pack()
+
+    bfront = Button(text="F", height=2, width=4, relief=RAISED, command=draw_front)
+    bfront_window = v_canvas.create_window(10 + 12 * g_faces_cube_width, 10 + 0.1 * g_faces_cube_width, anchor=NW, window=bfront)
+
+    bnewcubfaces = Button(text="Scramble", height=2, width=10, relief=RAISED, command=draw_scramble)
+    bnewcubfaces_window  = v_canvas.create_window(10 + 10.5 * g_faces_cube_width, 10 + 6.5 * g_faces_cube_width, anchor=NW, window=bnewcubfaces)
+    display = Text(height=7, width=39)
+    text_window = v_canvas.create_window(10 + 6.5 * g_faces_cube_width, 10 + .5 * g_faces_cube_width, anchor=NW, window=display)
+    # display.insert(INSERT, g_cube)
+
+    draw_cube_faces(g_cube)
+    root.mainloop()
+    # find_solve_2(v_cube, '', vTurns)
+    # print(g_faces_cube)
     print('cube scramble')
     print(ff)
     print(v_cube)
@@ -609,5 +673,5 @@ if __name__ == '__main__':
     # print('state: ', end=' '), show_text(v_cube_state),
     # print('cubes done: ', v_cube_done)
     # print((check_solve(v_cube)))
-    print()
+    print('End.')
 
