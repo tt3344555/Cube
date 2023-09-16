@@ -414,8 +414,8 @@ def find_solve_2(v_cube: str, v_formula: str, v_turns: str):
 if __name__ == '__main__':
     # ff = 'U F R F" U'
     v_cube = init_cube()
-    # ff = scramble_turns(5, 'U F R')
-    ff = scramble(5)
+    ff = scramble_turns(5, 'U F R U" F" R" U2 F2 R2')
+    # ff = scramble(5)
     print(ff)
     v_cube = formula(v_cube, ff)
     v_cube_state = calc_cube_state(v_cube)
