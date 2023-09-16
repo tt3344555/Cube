@@ -78,6 +78,7 @@ def show_text(v_cube: str):
 
 def init_cube() -> str:
     global g_cube
+    g_cube = '.YYYYYYYYYBBBBBBBBBRRRRRRRRRGGGGGGGGGOOOOOOOOOWWWWWWWWW'
     return g_cube
 
 
