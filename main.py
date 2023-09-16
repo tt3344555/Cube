@@ -249,6 +249,13 @@ def move_m(v_cube: str, count: int):
         v_cube = _change_elements(v_cube, 8, 26, 53, 38)
     return v_cube
 
+def move_m_cc(v_cube: str, count: int):
+    for i in range(0, count):
+        v_cube = _change_elements(v_cube, 2, 44, 47, 20)
+        v_cube = _change_elements(v_cube, 5, 41, 50, 23)
+        v_cube = _change_elements(v_cube, 8, 38, 53, 26)
+    return v_cube
+
 
 def move_e(v_cube: str, count: int):
     for i in range(0, count):
@@ -257,12 +264,135 @@ def move_e(v_cube: str, count: int):
         v_cube = _change_elements(v_cube, 24, 33, 42, 15)
     return v_cube
 
+def move_e_cc(v_cube: str, count: int):
+    for i in range(0, count):
+        v_cube = _change_elements(v_cube, 22, 13, 40, 31)
+        v_cube = _change_elements(v_cube, 23, 14, 41, 32)
+        v_cube = _change_elements(v_cube, 24, 15, 42, 33)
+    return v_cube
 
 def move_s(v_cube: str, count: int):
     for i in range(0, count):
         v_cube = _change_elements(v_cube, 4, 29, 51, 17)
         v_cube = _change_elements(v_cube, 5, 32, 50, 14)
         v_cube = _change_elements(v_cube, 6, 35, 49, 11)
+    return v_cube
+
+def move_s_cc(v_cube: str, count: int):
+    for i in range(0, count):
+        v_cube = _change_elements(v_cube, 4, 17, 51, 29)
+        v_cube = _change_elements(v_cube, 5, 14, 50, 32)
+        v_cube = _change_elements(v_cube, 6, 11, 49, 35)
+    return v_cube
+
+
+def move_rr(v_cube: str, count: int):
+    for i in range(0, count):
+        v_cube = move_r(v_cube, count)
+        v_cube = move_m_cc(v_cube, count)
+    return v_cube
+
+def move_rr_cc(v_cube: str, count: int):
+    for i in range(0, count):
+        v_cube = move_r_cc(v_cube, count)
+        v_cube = move_m(v_cube, count)
+    return v_cube
+
+def move_ll(v_cube: str, count: int):
+    for i in range(0, count):
+        v_cube = move_l(v_cube, count)
+        v_cube = move_m(v_cube, count)
+    return v_cube
+
+def move_ll_cc(v_cube: str, count: int):
+    for i in range(0, count):
+        v_cube = move_l_cc(v_cube, count)
+        v_cube = move_m_cc(v_cube, count)
+    return v_cube
+
+def move_uu(v_cube: str, count: int):
+    for i in range(0, count):
+        v_cube = move_u(v_cube, count)
+        v_cube = move_e_cc(v_cube, count)
+    return v_cube
+
+def move_uu_cc(v_cube: str, count: int):
+    for i in range(0, count):
+        v_cube = move_u_cc(v_cube, count)
+        v_cube = move_e(v_cube, count)
+    return v_cube
+
+def move_dd(v_cube: str, count: int):
+    for i in range(0, count):
+        v_cube = move_d(v_cube, count)
+        v_cube = move_e(v_cube, count)
+    return v_cube
+
+def move_dd_cc(v_cube: str, count: int):
+    for i in range(0, count):
+        v_cube = move_d_cc(v_cube, count)
+        v_cube = move_e_cc(v_cube, count)
+    return v_cube
+
+def move_ff(v_cube: str, count: int):
+    for i in range(0, count):
+        v_cube = move_f(v_cube, count)
+        v_cube = move_s(v_cube, count)
+    return v_cube
+
+def move_ff_cc(v_cube: str, count: int):
+    for i in range(0, count):
+        v_cube = move_f_cc(v_cube, count)
+        v_cube = move_s_cc(v_cube, count)
+    return v_cube
+
+def move_bb(v_cube: str, count: int):
+    for i in range(0, count):
+        v_cube = move_b(v_cube, count)
+        v_cube = move_s_cc(v_cube, count)
+    return v_cube
+
+def move_bb_cc(v_cube: str, count: int):
+    for i in range(0, count):
+        v_cube = move_b_cc(v_cube, count)
+        v_cube = move_s(v_cube, count)
+    return v_cube
+
+def move_xxx(v_cube: str, count: int):
+    for i in range(0, count):
+        v_cube = move_rr(v_cube, count)
+        v_cube = move_l_cc(v_cube, count)
+    return v_cube
+
+def move_xxx_cc(v_cube: str, count: int):
+    for i in range(0, count):
+        v_cube = move_rr_cc(v_cube, count)
+        v_cube = move_l(v_cube, count)
+    return v_cube
+
+
+def move_yyy(v_cube: str, count: int):
+    for i in range(0, count):
+        v_cube = move_u(v_cube, count)
+        v_cube = move_dd_cc(v_cube, count)
+    return v_cube
+
+def move_yyy_cc(v_cube: str, count: int):
+    for i in range(0, count):
+        v_cube = move_u_cc(v_cube, count)
+        v_cube = move_dd(v_cube, count)
+    return v_cube
+
+def move_zzz(v_cube: str, count: int):
+    for i in range(0, count):
+        v_cube = move_bb_cc(v_cube, count)
+        v_cube = move_f(v_cube, count)
+    return v_cube
+
+def move_zzz_cc(v_cube: str, count: int):
+    for i in range(0, count):
+        v_cube = move_bb(v_cube, count)
+        v_cube = move_f_cc(v_cube, count)
     return v_cube
 
 
@@ -283,9 +413,27 @@ def _formula_element(v_cube, element: str) -> str:
     if element == 'U"': v_cube = move_u_cc(v_cube, 1)
     if element == 'F"': v_cube = move_f_cc(v_cube, 1)
     if element == 'B"': v_cube = move_b_cc(v_cube, 1)
-    if element == 'M"': v_cube = move_m(v_cube, 3)
-    if element == 'E"': v_cube = move_e(v_cube, 3)
-    if element == 'S"': v_cube = move_s(v_cube, 3)
+    if element == 'M"': v_cube = move_m_cc(v_cube, 1)
+    if element == 'E"': v_cube = move_e_cc(v_cube, 1)
+    if element == 'S"': v_cube = move_s_cc(v_cube, 1)
+    if element == 'r': v_cube = move_rr(v_cube, 1)
+    if element == 'l': v_cube = move_ll(v_cube, 1)
+    if element == 'u': v_cube = move_uu(v_cube, 1)
+    if element == 'd': v_cube = move_dd(v_cube, 1)
+    if element == 'f': v_cube = move_ff(v_cube, 1)
+    if element == 'b': v_cube = move_bb(v_cube, 1)
+    if element == 'x': v_cube = move_xxx(v_cube, 1)
+    if element == 'y': v_cube = move_yyy(v_cube, 1)
+    if element == 'z': v_cube = move_zzz(v_cube, 1)
+    if element == 'r"': v_cube = move_rr_cc(v_cube, 1)
+    if element == 'l"': v_cube = move_ll_cc(v_cube, 1)
+    if element == 'u"': v_cube = move_uu_cc(v_cube, 1)
+    if element == 'd"': v_cube = move_dd_cc(v_cube, 1)
+    if element == 'f"': v_cube = move_ff_cc(v_cube, 1)
+    if element == 'b"': v_cube = move_bb_cc(v_cube, 1)
+    if element == 'x"': v_cube = move_xxx_cc(v_cube, 1)
+    if element == 'y"': v_cube = move_yyy_cc(v_cube, 1)
+    if element == 'z"': v_cube = move_zzz_cc(v_cube, 1)
     # twice
     if element == 'R2': v_cube = move_r(v_cube, 2)
     if element == 'L2': v_cube = move_l(v_cube, 2)
@@ -305,6 +453,24 @@ def _formula_element(v_cube, element: str) -> str:
     if element == 'M"2': v_cube = move_m(v_cube, 2)
     if element == 'E"2': v_cube = move_e(v_cube, 2)
     if element == 'S"2': v_cube = move_s(v_cube, 2)
+    if element == 'r2': v_cube = move_rr(v_cube, 2)
+    if element == 'l2': v_cube = move_ll(v_cube, 2)
+    if element == 'u2': v_cube = move_uu(v_cube, 2)
+    if element == 'd2': v_cube = move_dd(v_cube, 2)
+    if element == 'f2': v_cube = move_ff(v_cube, 2)
+    if element == 'b2': v_cube = move_bb(v_cube, 2)
+    if element == 'x2': v_cube = move_xxx(v_cube, 2)
+    if element == 'y2': v_cube = move_yyy(v_cube, 2)
+    if element == 'z2': v_cube = move_zzz(v_cube, 2)
+    if element == 'r"2': v_cube = move_rr_cc(v_cube, 2)
+    if element == 'l"2': v_cube = move_ll_cc(v_cube, 2)
+    if element == 'u"2': v_cube = move_uu_cc(v_cube, 2)
+    if element == 'd"2': v_cube = move_dd_cc(v_cube, 2)
+    if element == 'f"2': v_cube = move_ff_cc(v_cube, 2)
+    if element == 'b"2': v_cube = move_bb_cc(v_cube, 2)
+    if element == 'x"2': v_cube = move_xxx_cc(v_cube, 2)
+    if element == 'y"2': v_cube = move_yyy_cc(v_cube, 2)
+    if element == 'z"2': v_cube = move_zzz_cc(v_cube, 2)
     return v_cube
 
 
@@ -352,23 +518,27 @@ def scramble(count: int) -> str:
 
 def scramble_turns(count: int, v_turns: str) -> str:
     v_turns_list = v_turns.split(' ')
-    ff = []
-    for ind in range(0, count):
-        ff.append(v_turns_list[round((len(v_turns_list) - 1) * random())])
+    ss = v_turns_list[round((len(v_turns_list) - 1) * random())]
+    ff.append(ss)
+    for ind in range(0, count-1):
+        ss = ff.__getitem__(ind)
+        v_turns_list = vTurnsNext[str(ss)].split(' ')
+        ss = v_turns_list[round((len(v_turns_list) - 1) * random())]
+        ff.append(ss)
     return _to_str_split(ff)
 
 
-def find_next_move_2(v_cube: str, v_formula: str, v_turns: str, v_delta: int) -> str:
-    v_turn_list = v_turns.split(' ')
-    v_cube = formula(v_cube, v_formula)
-    v_cube_done = calc_cube_done(v_cube)
-    v_next_move = ''
-    for ind in range(0, len(v_turn_list)):
-        v_cube_done_new = calc_cube_done(formula(v_cube, str(v_turn_list[ind])))
-        if (v_cube_done_new >= v_cube_done - v_delta) and (v_cube_done_new > 0):
-            v_next_move = str(v_turn_list[ind])
-            break
-    return v_next_move
+# def find_next_move_2(v_cube: str, v_formula: str, v_turns: str, v_delta: int) -> str:
+#     v_turn_list = v_turns.split(' ')
+#     v_cube = formula(v_cube, v_formula)
+#     v_cube_done = calc_cube_done(v_cube)
+#     v_next_move = ''
+#     for ind in range(0, len(v_turn_list)):
+#         v_cube_done_new = calc_cube_done(formula(v_cube, str(v_turn_list[ind])))
+#         if (v_cube_done_new >= v_cube_done - v_delta) and (v_cube_done_new > 0):
+#             v_next_move = str(v_turn_list[ind])
+#             break
+#     return v_next_move
 
 def find_next_turns_2(v_cube: str, v_formula: str, v_turns: str, v_delta) -> str:
     v_turns_list = v_turns.split(' ')
