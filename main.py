@@ -6,7 +6,7 @@ from cube import _to_str_split
 # import sys
 # sys.setrecursionlimit(5000)
 
-g_faces_cube_width = 50
+g_faces_cube_width = 45
 g_button_width = 40
 g_faces_cube = [0 for ind in range(54)]
 g_faces_text = {'up': 'U', 'left': 'L', 'front': 'F', 'right': 'R', 'back': 'B', 'down': 'D', }
@@ -18,20 +18,27 @@ g_faces_offset_y = {'up': 0, 'left': 3, 'front': 3, 'right': 3, 'back': 3, 'down
 def draw_cube_faces(v_cube: str):
     for iside in ('up', 'left', 'front', 'right', 'back', 'down'):
         for cind in range(9):
-            v_cube_x = 10 + (cind - (cind // 3) * 3) * g_faces_cube_width + g_faces_offset_x[iside] * g_faces_cube_width
-            v_cube_y = 10 + (cind // 3) * g_faces_cube_width + g_faces_offset_y[iside] * g_faces_cube_width
+            v_cube_x = 10 + (cind - (cind // 3) * 3) * g_faces_cube_width + g_faces_offset_x[iside] * g_faces_cube_width + g_faces_offset_x[iside]
+            v_cube_y = 10 + (cind // 3) * g_faces_cube_width + g_faces_offset_y[iside] * g_faces_cube_width + g_faces_offset_y[iside]
             g_faces_cube[g_side[iside] * 9 + cind] = v_canvas.create_rectangle(v_cube_x, v_cube_y,
                      v_cube_x + g_faces_cube_width, v_cube_y + g_faces_cube_width,
                       fill=g_faces_colors[str(v_cube[g_side[iside] * 9 + cind + 1])])
             if cind == 4:
                 v_canvas.create_text(v_cube_x + g_faces_cube_width // 2, v_cube_y + g_faces_cube_width // 2,
-                                     font=('', 14), text=g_faces_text[iside], state=DISABLED)
+                                     font=('', 13), text=g_faces_text[iside], state=DISABLED)
 
 def draw_cube_faces_update():
     global g_cube
     for ind in range(len(g_faces_cube)):
         v_canvas.itemconfig(g_faces_cube[ind], fill=g_faces_colors[str(g_cube[ind + 1])])
     # v_canvas.tag_raise(v_canvas.index(ind))
+
+def draw_full():
+    global g_cube
+    g_cube = init_cube()
+    text1.delete("1.0", "end")
+    draw_cube_faces_update()
+
 
 def draw_scramble():
     global g_cube
@@ -46,8 +53,6 @@ def draw_scramble():
 def draw_move(v_move: str):
     global g_cube
     g_cube = formula(g_cube, v_move)
-    text1.delete("1.0", "end")
-    text1.insert(INSERT, _to_str_split(v_move) + '\n')
     draw_cube_faces_update()
 
 
@@ -192,8 +197,10 @@ if __name__ == '__main__':
     bz2_window = v_canvas.create_window(20 + 12 * g_faces_cube_width + 17 * g_button_width, 10 + 2.1 * g_button_width, anchor=NW, window=bz2)
 
 
-    bnewcubfaces = Button(text="Scramble", height=2, width=10, relief=RAISED, command=draw_scramble)
-    bnewcubfaces_window  = v_canvas.create_window(10 + 10.5 * g_faces_cube_width, 10 + 6.5 * g_faces_cube_width, anchor=NW, window=bnewcubfaces)
+    bscramble = Button(text="Scramble", height=1, width=8, relief=RAISED, command=draw_scramble)
+    bscramble_window  = v_canvas.create_window(10, 10 + 0.1 * g_button_width, anchor=NW, window=bscramble)
+    bfull = Button(text="Full", height=1, width=8, relief=RAISED, command=draw_full)
+    bfull_window  = v_canvas.create_window(10, 10 + 0.8 * g_button_width, anchor=NW, window=bfull)
     text1 = Text(height=7, width=20)
     text_window = v_canvas.create_window(10 + 6.2 * g_faces_cube_width, 10 , anchor=NW, window=text1)
     # display.insert(INSERT, g_cube)
