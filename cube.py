@@ -286,112 +286,94 @@ def move_s_cc(v_cube: str, count: int):
 
 
 def move_rr(v_cube: str, count: int):
-    for i in range(0, count):
-        v_cube = move_r(v_cube, count)
-        v_cube = move_m_cc(v_cube, count)
+    v_cube = move_r(v_cube, count)
+    v_cube = move_m_cc(v_cube, count)
     return v_cube
 
 def move_rr_cc(v_cube: str, count: int):
-    for i in range(0, count):
-        v_cube = move_r_cc(v_cube, count)
-        v_cube = move_m(v_cube, count)
+    v_cube = move_r_cc(v_cube, count)
+    v_cube = move_m(v_cube, count)
     return v_cube
 
 def move_ll(v_cube: str, count: int):
-    for i in range(0, count):
-        v_cube = move_l(v_cube, count)
-        v_cube = move_m(v_cube, count)
+    v_cube = move_l(v_cube, count)
+    v_cube = move_m(v_cube, count)
     return v_cube
 
 def move_ll_cc(v_cube: str, count: int):
-    for i in range(0, count):
-        v_cube = move_l_cc(v_cube, count)
-        v_cube = move_m_cc(v_cube, count)
+    v_cube = move_l_cc(v_cube, count)
+    v_cube = move_m_cc(v_cube, count)
     return v_cube
 
 def move_uu(v_cube: str, count: int):
-    for i in range(0, count):
-        v_cube = move_u(v_cube, count)
-        v_cube = move_e_cc(v_cube, count)
+    v_cube = move_u(v_cube, count)
+    v_cube = move_e_cc(v_cube, count)
     return v_cube
 
 def move_uu_cc(v_cube: str, count: int):
-    for i in range(0, count):
-        v_cube = move_u_cc(v_cube, count)
-        v_cube = move_e(v_cube, count)
+    v_cube = move_u_cc(v_cube, count)
+    v_cube = move_e(v_cube, count)
     return v_cube
 
 def move_dd(v_cube: str, count: int):
-    for i in range(0, count):
-        v_cube = move_d(v_cube, count)
-        v_cube = move_e(v_cube, count)
+    v_cube = move_d(v_cube, count)
+    v_cube = move_e(v_cube, count)
     return v_cube
 
 def move_dd_cc(v_cube: str, count: int):
-    for i in range(0, count):
-        v_cube = move_d_cc(v_cube, count)
-        v_cube = move_e_cc(v_cube, count)
+    v_cube = move_d_cc(v_cube, count)
+    v_cube = move_e_cc(v_cube, count)
     return v_cube
 
 def move_ff(v_cube: str, count: int):
-    for i in range(0, count):
-        v_cube = move_f(v_cube, count)
-        v_cube = move_s(v_cube, count)
+    v_cube = move_f(v_cube, count)
+    v_cube = move_s(v_cube, count)
     return v_cube
 
 def move_ff_cc(v_cube: str, count: int):
-    for i in range(0, count):
-        v_cube = move_f_cc(v_cube, count)
-        v_cube = move_s_cc(v_cube, count)
+    v_cube = move_f_cc(v_cube, count)
+    v_cube = move_s_cc(v_cube, count)
     return v_cube
 
 def move_bb(v_cube: str, count: int):
-    for i in range(0, count):
-        v_cube = move_b(v_cube, count)
-        v_cube = move_s_cc(v_cube, count)
+    v_cube = move_b(v_cube, count)
+    v_cube = move_s_cc(v_cube, count)
     return v_cube
 
 def move_bb_cc(v_cube: str, count: int):
-    for i in range(0, count):
-        v_cube = move_b_cc(v_cube, count)
-        v_cube = move_s(v_cube, count)
+    v_cube = move_b_cc(v_cube, count)
+    v_cube = move_s(v_cube, count)
     return v_cube
 
 def move_xxx(v_cube: str, count: int):
-    for i in range(0, count):
-        v_cube = move_rr(v_cube, count)
-        v_cube = move_l_cc(v_cube, count)
+    v_cube = move_rr(v_cube, count)
+    v_cube = move_l_cc(v_cube, count)
     return v_cube
 
 def move_xxx_cc(v_cube: str, count: int):
-    for i in range(0, count):
-        v_cube = move_rr_cc(v_cube, count)
-        v_cube = move_l(v_cube, count)
+    v_cube = move_rr_cc(v_cube, count)
+    v_cube = move_l(v_cube, count)
     return v_cube
 
 
 def move_yyy(v_cube: str, count: int):
-    for i in range(0, count):
-        v_cube = move_u(v_cube, count)
-        v_cube = move_dd_cc(v_cube, count)
+    v_cube = move_u(v_cube, count)
+    v_cube = move_dd_cc(v_cube, count)
     return v_cube
 
 def move_yyy_cc(v_cube: str, count: int):
-    for i in range(0, count):
-        v_cube = move_u_cc(v_cube, count)
-        v_cube = move_dd(v_cube, count)
+    v_cube = move_u_cc(v_cube, count)
+    v_cube = move_dd(v_cube, count)
     return v_cube
 
 def move_zzz(v_cube: str, count: int):
-    for i in range(0, count):
-        v_cube = move_bb_cc(v_cube, count)
-        v_cube = move_f(v_cube, count)
+    v_cube = move_bb_cc(v_cube, count)
+    v_cube = move_f(v_cube, count)
     return v_cube
 
 def move_zzz_cc(v_cube: str, count: int):
-    for i in range(0, count):
-        v_cube = move_bb(v_cube, count)
-        v_cube = move_f_cc(v_cube, count)
+    v_cube = move_bb(v_cube, count)
+    v_cube = move_f_cc(v_cube, count)
     return v_cube
 
 
