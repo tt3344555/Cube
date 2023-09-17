@@ -3,6 +3,7 @@
 from tkinter import *
 from cube import *
 from cube import _to_str_split
+
 # import sys
 # sys.setrecursionlimit(5000)
 
