@@ -1,6 +1,7 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 from random import random
+
 # import sys
 
 
@@ -11,10 +12,10 @@ g_done = False
 g_cube = '.YYYYYYYYYBBBBBBBBBRRRRRRRRRGGGGGGGGGOOOOOOOOOWWWWWWWWW'
 
 g_cubes = [(7, 12, 19), (18, 25, 46), (1, 10, 39), (45, 16, 52),
-          (21, 28, 9), (27, 34, 48), (3, 30, 37), (54, 36, 43),
-          (24, 31), (20, 8), (22, 15), (26, 47),
-          (2, 38), (33, 40), (13, 42), (53, 44),
-          (6, 29), (4, 11), (35, 51), (17, 49)]
+           (21, 28, 9), (27, 34, 48), (3, 30, 37), (54, 36, 43),
+           (24, 31), (20, 8), (22, 15), (26, 47),
+           (2, 38), (33, 40), (13, 42), (53, 44),
+           (6, 29), (4, 11), (35, 51), (17, 49)]
 # vTurn = ['R', 'L', 'F', 'B', 'U', 'D',
 #          'R"', 'L"', 'F"', 'B"', 'U"', 'D"',
 #          'R2', 'L2', 'F2', 'B2', 'U2', 'D2',
@@ -22,24 +23,25 @@ g_cubes = [(7, 12, 19), (18, 25, 46), (1, 10, 39), (45, 16, 52),
 
 vTurn = ['R', 'L', 'F', 'B', 'U', 'D', 'R"', 'L"', 'F"', 'B"', 'U"', 'D"', 'R2', 'L2', 'F2', 'B2', 'U2', 'D2']
 vTurns = 'R L F B U D R" L" F" B" U" D" R2 L2 F2 B2 U2 D2'
-vTurnsNext = {'R':'L F B U D L" F" B" U" D" L2 F2 B2 U2 D2',
-              'L':'R F B U D R" F" B" U" D" R2 F2 B2 U2 D2',
-              'F':'R L B U D R" L" B" U" D" R2 L2 B2 U2 D2',
-              'B':'R L F U D R" L" F" U" D" R2 L2 F2 U2 D2',
-              'U':'R L F B D R" L" F" B" D" R2 L2 F2 B2 D2',
-              'D':'R L F B U R" L" F" B" U" R2 L2 F2 B2 U2',
-              'R"':'L F B U D L" F" B" U" D" L2 F2 B2 U2 D2',
-              'L"':'R F B U D R" F" B" U" D" R2 F2 B2 U2 D2',
-              'F"':'R L B U D R" L" B" U" D" R2 L2 B2 U2 D2',
-              'B"':'R L F U D R" L" F" U" D" R2 L2 F2 U2 D2',
-              'U"':'R L F B D R" L" F" B" D" R2 L2 F2 B2 D2',
-              'D"':'R L F B U R" L" F" B" U" R2 L2 F2 B2 U2',
-              'R2':'L F B U D L" F" B" U" D" L2 F2 B2 U2 D2',
-              'L2':'R F B U D R" F" B" U" D" R2 F2 B2 U2 D2',
-              'F2':'R L B U D R" L" B" U" D" R2 L2 B2 U2 D2',
-              'B2':'R L F U D R" L" F" U" D" R2 L2 F2 U2 D2',
-              'U2':'R L F B D R" L" F" B" D" R2 L2 F2 B2 D2',
-              'D2':'R L F B U R" L" F" B" U" R2 L2 F2 B2 U2'}
+vTurnsNext = {'R': 'L F B U D L" F" B" U" D" L2 F2 B2 U2 D2',
+              'L': 'R F B U D R" F" B" U" D" R2 F2 B2 U2 D2',
+              'F': 'R L B U D R" L" B" U" D" R2 L2 B2 U2 D2',
+              'B': 'R L F U D R" L" F" U" D" R2 L2 F2 U2 D2',
+              'U': 'R L F B D R" L" F" B" D" R2 L2 F2 B2 D2',
+              'D': 'R L F B U R" L" F" B" U" R2 L2 F2 B2 U2',
+              'R"': 'L F B U D L" F" B" U" D" L2 F2 B2 U2 D2',
+              'L"': 'R F B U D R" F" B" U" D" R2 F2 B2 U2 D2',
+              'F"': 'R L B U D R" L" B" U" D" R2 L2 B2 U2 D2',
+              'B"': 'R L F U D R" L" F" U" D" R2 L2 F2 U2 D2',
+              'U"': 'R L F B D R" L" F" B" D" R2 L2 F2 B2 D2',
+              'D"': 'R L F B U R" L" F" B" U" R2 L2 F2 B2 U2',
+              'R2': 'L F B U D L" F" B" U" D" L2 F2 B2 U2 D2',
+              'L2': 'R F B U D R" F" B" U" D" R2 F2 B2 U2 D2',
+              'F2': 'R L B U D R" L" B" U" D" R2 L2 B2 U2 D2',
+              'B2': 'R L F U D R" L" F" U" D" R2 L2 F2 U2 D2',
+              'U2': 'R L F B D R" L" F" B" D" R2 L2 F2 B2 D2',
+              'D2': 'R L F B U R" L" F" B" U" R2 L2 F2 B2 U2'}
+
 
 def show_sides(v_cube_side: str):
     fside = get_side(v_cube_side, 'front')
@@ -103,6 +105,7 @@ def _to_str(v_list: list) -> str:
     for ind in range(0, len(v_list)):
         res = res + str(v_list.__getitem__(ind))
     return res
+
 
 def _to_str_split(v_list: list) -> str:
     res = ''
@@ -248,6 +251,7 @@ def move_m(v_cube: str, count: int):
         v_cube = _change_elements(v_cube, 8, 26, 53, 38)
     return v_cube
 
+
 def move_m_cc(v_cube: str, count: int):
     for i in range(0, count):
         v_cube = _change_elements(v_cube, 2, 44, 47, 20)
@@ -263,6 +267,7 @@ def move_e(v_cube: str, count: int):
         v_cube = _change_elements(v_cube, 24, 33, 42, 15)
     return v_cube
 
+
 def move_e_cc(v_cube: str, count: int):
     for i in range(0, count):
         v_cube = _change_elements(v_cube, 22, 13, 40, 31)
@@ -270,12 +275,14 @@ def move_e_cc(v_cube: str, count: int):
         v_cube = _change_elements(v_cube, 24, 15, 42, 33)
     return v_cube
 
+
 def move_s(v_cube: str, count: int):
     for i in range(0, count):
         v_cube = _change_elements(v_cube, 4, 29, 51, 17)
         v_cube = _change_elements(v_cube, 5, 32, 50, 14)
         v_cube = _change_elements(v_cube, 6, 35, 49, 11)
     return v_cube
+
 
 def move_s_cc(v_cube: str, count: int):
     for i in range(0, count):
@@ -290,65 +297,78 @@ def move_rr(v_cube: str, count: int):
     v_cube = move_m_cc(v_cube, count)
     return v_cube
 
+
 def move_rr_cc(v_cube: str, count: int):
     v_cube = move_r_cc(v_cube, count)
     v_cube = move_m(v_cube, count)
     return v_cube
+
 
 def move_ll(v_cube: str, count: int):
     v_cube = move_l(v_cube, count)
     v_cube = move_m(v_cube, count)
     return v_cube
 
+
 def move_ll_cc(v_cube: str, count: int):
     v_cube = move_l_cc(v_cube, count)
     v_cube = move_m_cc(v_cube, count)
     return v_cube
+
 
 def move_uu(v_cube: str, count: int):
     v_cube = move_u(v_cube, count)
     v_cube = move_e_cc(v_cube, count)
     return v_cube
 
+
 def move_uu_cc(v_cube: str, count: int):
     v_cube = move_u_cc(v_cube, count)
     v_cube = move_e(v_cube, count)
     return v_cube
+
 
 def move_dd(v_cube: str, count: int):
     v_cube = move_d(v_cube, count)
     v_cube = move_e(v_cube, count)
     return v_cube
 
+
 def move_dd_cc(v_cube: str, count: int):
     v_cube = move_d_cc(v_cube, count)
     v_cube = move_e_cc(v_cube, count)
     return v_cube
+
 
 def move_ff(v_cube: str, count: int):
     v_cube = move_f(v_cube, count)
     v_cube = move_s(v_cube, count)
     return v_cube
 
+
 def move_ff_cc(v_cube: str, count: int):
     v_cube = move_f_cc(v_cube, count)
     v_cube = move_s_cc(v_cube, count)
     return v_cube
+
 
 def move_bb(v_cube: str, count: int):
     v_cube = move_b(v_cube, count)
     v_cube = move_s_cc(v_cube, count)
     return v_cube
 
+
 def move_bb_cc(v_cube: str, count: int):
     v_cube = move_b_cc(v_cube, count)
     v_cube = move_s(v_cube, count)
     return v_cube
 
+
 def move_xxx(v_cube: str, count: int):
     v_cube = move_rr(v_cube, count)
     v_cube = move_l_cc(v_cube, count)
     return v_cube
+
 
 def move_xxx_cc(v_cube: str, count: int):
     v_cube = move_rr_cc(v_cube, count)
@@ -361,15 +381,18 @@ def move_yyy(v_cube: str, count: int):
     v_cube = move_dd_cc(v_cube, count)
     return v_cube
 
+
 def move_yyy_cc(v_cube: str, count: int):
     v_cube = move_u_cc(v_cube, count)
     v_cube = move_dd(v_cube, count)
     return v_cube
 
+
 def move_zzz(v_cube: str, count: int):
     v_cube = move_bb_cc(v_cube, count)
     v_cube = move_f(v_cube, count)
     return v_cube
+
 
 def move_zzz_cc(v_cube: str, count: int):
     v_cube = move_bb(v_cube, count)
@@ -494,7 +517,7 @@ def scramble(count: int) -> str:
     ss = v_turns_list[round((len(v_turns_list) - 1) * random())]
     ff = []
     ff.append(ss)
-    for ind in range(0, count-1):
+    for ind in range(0, count - 1):
         ss = ff.__getitem__(ind)
         v_turns_list = vTurnsNext[str(ss)].split(' ')
         ss = v_turns_list[round((len(v_turns_list) - 1) * random())]
@@ -507,7 +530,7 @@ def scramble_turns(count: int, v_turns: str) -> str:
     ss = v_turns_list[round((len(v_turns_list) - 1) * random())]
     ff = []
     ff.append(ss)
-    for ind in range(0, count-1):
+    for ind in range(0, count - 1):
         ss = ff.__getitem__(ind)
         v_turns_list = vTurnsNext[str(ss)].split(' ')
         ss = v_turns_list[round((len(v_turns_list) - 1) * random())]
@@ -557,7 +580,7 @@ def find_solve_2(v_cube: str, v_formula: str, v_turns: str):
         if v_depth <= 3: print('find: ', v_depth, v_cube, ' - ', v_formula, ' - ', v_turns_new)
         while (v_turns_new != '') and (v_depth < 7):
             v_next_move = str(v_turns_new.split(' ').__getitem__(0))
-            v_formula_new = v_formula+' '+v_next_move
+            v_formula_new = v_formula + ' ' + v_next_move
             v_turns_next = vTurnsNext[v_next_move]
             find_solve_2(v_cube, v_formula_new, v_turns_next)
             if g_done == True:
@@ -566,5 +589,3 @@ def find_solve_2(v_cube: str, v_formula: str, v_turns: str):
                 v_turns_new_list = v_turns_new.split(' ')
                 v_turns_new_list.__delitem__(v_turns_new_list.index(v_next_move))
                 v_turns_new = _to_str_split(v_turns_new_list)
-
-

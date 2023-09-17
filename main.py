@@ -207,7 +207,7 @@ if __name__ == '__main__':
     # print(v_cube)
     # show_sides(v_cube)
     # print('cube:  ', end=' '), show_text(v_cube),
-    # print('state: ', end=' '), show_text(v_cube_state),
+    # print('state: ', end=' '), show_text(v_cube_state)
     # print('cubes done: ', v_cube_done)
     # print((check_solve(v_cube)))
     print('End.')
