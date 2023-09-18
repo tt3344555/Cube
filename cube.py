@@ -1,7 +1,8 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 from random import random
-
+from const import F2L
+# import const
 # import sys
 
 
@@ -41,28 +42,6 @@ vTurnsNext = {'R': 'L F B U D L" F" B" U" D" L2 F2 B2 U2 D2',
               'B2': 'R L F U D R" L" F" U" D" R2 L2 F2 U2 D2',
               'U2': 'R L F B D R" L" F" B" D" R2 L2 F2 B2 D2',
               'D2': 'R L F B U R" L" F" B" U" R2 L2 F2 B2 U2'}
-
-F2L_ALGORITM_01 = ''
-F2L_ALGORITM_01 = ''
-F2L_ALGORITM_01 = ''
-F2L_ALGORITM_01 = ''
-F2L_ALGORITM_01 = ''
-F2L_ALGORITM_01 = ''
-F2L_ALGORITM_01 = ''
-F2L_ALGORITM_01 = ''
-F2L_ALGORITM_01 = ''
-F2L_ALGORITM_01 = ''
-F2L_ALGORITM_01 = ''
-F2L_ALGORITM_01 = ''
-F2L_ALGORITM_01 = ''
-F2L_ALGORITM_01 = ''
-F2L_ALGORITM_01 = ''
-F2L_ALGORITM_01 = ''
-F2L_ALGORITM_01 = ''
-F2L_ALGORITM_01 = ''
-F2L_ALGORITM_01 = ''
-F2L_ALGORITM_01 = ''
-F2L_ALGORITM_01 = ''
 
 def show_sides(v_cube_side: str):
     fside = get_side(v_cube_side, 'front')
