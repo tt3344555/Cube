@@ -525,7 +525,7 @@ def scramble(count: int) -> str:
     return _to_str_split(ff)
 
 
-def scramble_turns(count: int, v_turns: str) -> str:
+def scramble_turns_next(count: int, v_turns: str) -> str:
     v_turns_list = v_turns.split(' ')
     ss = v_turns_list[round((len(v_turns_list) - 1) * random())]
     ff = []
@@ -536,6 +536,17 @@ def scramble_turns(count: int, v_turns: str) -> str:
         ss = v_turns_list[round((len(v_turns_list) - 1) * random())]
         ff.append(ss)
     return _to_str_split(ff)
+
+def scramble_turns_set(count: int, v_turns: str) -> str:
+    v_turns_list = v_turns.split(' ')
+    ss = v_turns_list[round((len(v_turns_list) - 1) * random())]
+    ff = []
+    ff.append(ss)
+    for ind in range(0, count - 1):
+        ss = v_turns_list[round((len(v_turns_list) - 1) * random())]
+        ff.append(ss)
+    return _to_str_split(ff)
+
 
 
 # def find_next_move_2(v_cube: str, v_formula: str, v_turns: str, v_delta: int) -> str:

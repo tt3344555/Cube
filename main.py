@@ -1,8 +1,9 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 from tkinter import *
+from tkinter.messagebox import *
 from cube import *
-from cube import _to_str_split
+from cube import _to_str_split,_to_str
 from const import *
 # import sys
 # sys.setrecursionlimit(5000)
@@ -49,11 +50,16 @@ def draw_full():
 def draw_scramble():
     global g_cube
     ff = []
-    ff = scramble(5)
+    v_turns = str(bscramble_text.get("1.0", "end"))
+    v_count = bscramble_count.get("1.0","end")
+    # showinfo(title='scramble', message=v_turns + ' - ' + v_count)
+    ff = scramble_turns_set(int(v_count), v_turns)
     g_cube = init_cube()
     g_cube = formula(g_cube, ff)
-    text1.delete("1.0", "end")
-    text1.insert(INSERT, _to_str_split(ff)+'\n')
+    text1.delete("0.0", "end")
+    ffs = _to_str(ff)
+    for ind in range(len(ffs)):
+        text1.insert(END, ffs[ind])
     draw_cube_faces_update()
 
 def draw_move(v_move: str):
@@ -67,6 +73,10 @@ def draw_main():
     global root
     global v_canvas
     global text1
+    global bscramble_text
+    global bscramble_text_window
+    global bscramble_count
+    global bscramble_count_window
     root = Tk()
     root.wm_title('Cube example')
     v_canvas = Canvas(root, width=30+g_faces_cube_width * 12 + 18 * g_button_width, height=g_faces_cube_width*9 + 30)
@@ -188,12 +198,16 @@ def draw_main():
     bz2 = Button(text="z2", height=2, width=4, font=('',9), relief=RAISED, command=lambda:draw_move('z2'))
     bz2_window = v_canvas.create_window(g_faces_block_offset_x + 12 * g_faces_cube_width + g_button_block_offset_x + 17 * g_button_width, 10 + 2.1 * g_button_width, anchor=NW, window=bz2)
     #
-    bscramble = Button(text="Scramble", height=1, width=8, relief=RAISED, command=draw_scramble)
-    bscramble_window  = v_canvas.create_window(10, 10 + 0.1 * g_button_width, anchor=NW, window=bscramble)
+    bscramble = Button(text="Scramble", height=2, width=15, relief=RAISED, command=draw_scramble)
+    bscramble_window  = v_canvas.create_window(g_faces_block_offset_x + 25 * g_faces_cube_width + g_button_block_offset_x + 10, 10 + 6 * g_button_block_offset_y + 10, anchor=NW, window=bscramble)
     bfull = Button(text="Full", height=1, width=8, relief=RAISED, command=draw_full)
     bfull_window  = v_canvas.create_window(10, 10 + 0.8 * g_button_width, anchor=NW, window=bfull)
-    text1 = Text(height=7, width=20)
+    text1 = Text(height=7, width=20, wrap='none', font=('', 10))
     text_window = v_canvas.create_window(10 + 6.2 * g_faces_cube_width, 10 , anchor=NW, window=text1)
+    bscramble_text = Text(height=2, width=66, wrap='none')
+    bscramble_text_window = v_canvas.create_window(g_faces_block_offset_x + 12 * g_faces_cube_width + g_button_block_offset_x, 10 + 6 * g_button_block_offset_y + 10 , anchor=NW, window=bscramble_text)
+    bscramble_count = Text(height=2, width=5, wrap='none')
+    bscramble_count_window = v_canvas.create_window(g_faces_block_offset_x + 24 * g_faces_cube_width + g_button_block_offset_x, 10 + 6 * g_button_block_offset_y + 10 , anchor=NW, window=bscramble_count)
     draw_cube_faces(g_cube)
     root.mainloop()
 
