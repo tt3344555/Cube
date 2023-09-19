@@ -128,8 +128,14 @@ def draw_main():
 
     root = Tk()
     root.wm_title('Cube example')
-    v_canvas = Canvas(root, width=30+g_faces_cube_width * 12 + 18 * g_button_width, height=g_faces_cube_width * 9 + 30)
-    v_canvas.pack()
+    v_canvas = Canvas(root, scrollregion=(0, 0, 30+g_faces_cube_width * 12 + 18 * g_button_width, 1000), width=30+g_faces_cube_width * 12 + 18 * g_button_width, height=g_faces_cube_width * 6 + 30) #9
+    v_canvas.pack(side=LEFT, fill=Y)
+    s = Scrollbar(root, command=v_canvas.yview)
+    s.pack(side=RIGHT, fill=Y)
+    v_canvas.configure(yscrollcommand=s.set)
+    v_canvas.configure(yscrollincrement='2')
+    # v_canvas_2 = Canvas(root, 30+g_faces_cube_width * 12 + 18 * g_button_width, height=g_faces_cube_width * 9 + 30)
+    # v_canvas.yview('scroll', 'units', 2)
     bfront = Button(text="F", height=2, width=4, font=('',9), relief=RAISED, command=lambda:draw_move('F'))
     bfront_window = v_canvas.create_window(g_faces_block_offset_x + 12 * g_faces_cube_width + g_button_block_offset_x + 0 * g_button_width, 10 + 0 * g_button_width, anchor=NW, window=bfront)
     bright = Button(text="R", height=2, width=4, font=('',9), relief=RAISED, command=lambda:draw_move('R'))
