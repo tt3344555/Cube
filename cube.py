@@ -18,30 +18,30 @@ g_cubes = [(7, 12, 19), (18, 25, 46), (1, 10, 39), (45, 16, 52),
            (2, 38), (33, 40), (13, 42), (53, 44),
            (6, 29), (4, 11), (35, 51), (17, 49)]
 # vTurn = ['R', 'L', 'F', 'B', 'U', 'D',
-#          'R"', 'L"', 'F"', 'B"', 'U"', 'D"',
+#          'R\'', 'L\'', 'F\'', 'B\'', 'U\'', 'D\'',
 #          'R2', 'L2', 'F2', 'B2', 'U2', 'D2',
 #          'M', 'E', 'S', 'M"', 'E"', 'S"', 'M2', 'E2', 'S2', 'M"2', 'E"2', 'S"2']
 
-vTurn = ['R', 'L', 'F', 'B', 'U', 'D', 'R"', 'L"', 'F"', 'B"', 'U"', 'D"', 'R2', 'L2', 'F2', 'B2', 'U2', 'D2']
-vTurns = 'R L F B U D R" L" F" B" U" D" R2 L2 F2 B2 U2 D2'
-vTurnsNext = {'R': 'L F B U D L" F" B" U" D" L2 F2 B2 U2 D2',
-              'L': 'R F B U D R" F" B" U" D" R2 F2 B2 U2 D2',
-              'F': 'R L B U D R" L" B" U" D" R2 L2 B2 U2 D2',
-              'B': 'R L F U D R" L" F" U" D" R2 L2 F2 U2 D2',
-              'U': 'R L F B D R" L" F" B" D" R2 L2 F2 B2 D2',
-              'D': 'R L F B U R" L" F" B" U" R2 L2 F2 B2 U2',
-              'R"': 'L F B U D L" F" B" U" D" L2 F2 B2 U2 D2',
-              'L"': 'R F B U D R" F" B" U" D" R2 F2 B2 U2 D2',
-              'F"': 'R L B U D R" L" B" U" D" R2 L2 B2 U2 D2',
-              'B"': 'R L F U D R" L" F" U" D" R2 L2 F2 U2 D2',
-              'U"': 'R L F B D R" L" F" B" D" R2 L2 F2 B2 D2',
-              'D"': 'R L F B U R" L" F" B" U" R2 L2 F2 B2 U2',
-              'R2': 'L F B U D L" F" B" U" D" L2 F2 B2 U2 D2',
-              'L2': 'R F B U D R" F" B" U" D" R2 F2 B2 U2 D2',
-              'F2': 'R L B U D R" L" B" U" D" R2 L2 B2 U2 D2',
-              'B2': 'R L F U D R" L" F" U" D" R2 L2 F2 U2 D2',
-              'U2': 'R L F B D R" L" F" B" D" R2 L2 F2 B2 D2',
-              'D2': 'R L F B U R" L" F" B" U" R2 L2 F2 B2 U2'}
+vTurn = ['R', 'L', 'F', 'B', 'U', 'D', 'R\'', 'L\'', 'F\'', 'B\'', 'U\'', 'D\'', 'R2', 'L2', 'F2', 'B2', 'U2', 'D2']
+vTurns = 'R L F B U D R\' L\' F\' B\' U\' D\' R2 L2 F2 B2 U2 D2'
+vTurnsNext = {'R': 'L F B U D L\' F\' B\' U\' D\' L2 F2 B2 U2 D2',
+              'L': 'R F B U D R\' F\' B\' U\' D\' R2 F2 B2 U2 D2',
+              'F': 'R L B U D R\' L\' B\' U\' D\' R2 L2 B2 U2 D2',
+              'B': 'R L F U D R\' L\' F\' U\' D\' R2 L2 F2 U2 D2',
+              'U': 'R L F B D R\' L\' F\' B\' D\' R2 L2 F2 B2 D2',
+              'D': 'R L F B U R\' L\' F\' B\' U\' R2 L2 F2 B2 U2',
+              'R\'': 'L F B U D L\' F\' B\' U\' D\' L2 F2 B2 U2 D2',
+              'L\'': 'R F B U D R\' F\' B\' U\' D\' R2 F2 B2 U2 D2',
+              'F\'': 'R L B U D R\' L\' B\' U\' D\' R2 L2 B2 U2 D2',
+              'B\'': 'R L F U D R\' L\' F\' U\' D\' R2 L2 F2 U2 D2',
+              'U\'': 'R L F B D R\' L\' F\' B\' D\' R2 L2 F2 B2 D2',
+              'D\'': 'R L F B U R\' L\' F\' B\' U\' R2 L2 F2 B2 U2',
+              'R2': 'L F B U D L\' F\' B\' U\' D\' L2 F2 B2 U2 D2',
+              'L2': 'R F B U D R\' F\' B\' U\' D\' R2 F2 B2 U2 D2',
+              'F2': 'R L B U D R\' L\' B\' U\' D\' R2 L2 B2 U2 D2',
+              'B2': 'R L F U D R\' L\' F\' U\' D\' R2 L2 F2 U2 D2',
+              'U2': 'R L F B D R\' L\' F\' B\' D\' R2 L2 F2 B2 D2',
+              'D2': 'R L F B U R\' L\' F\' B\' U\' R2 L2 F2 B2 U2'}
 
 def show_sides(v_cube_side: str):
     fside = get_side(v_cube_side, 'front')
@@ -411,15 +411,15 @@ def _formula_element(v_cube, element: str) -> str:
     if element == 'M': v_cube = move_m(v_cube, 1)
     if element == 'E': v_cube = move_e(v_cube, 1)
     if element == 'S': v_cube = move_s(v_cube, 1)
-    if element == 'R"': v_cube = move_r_cc(v_cube, 1)
-    if element == 'L"': v_cube = move_l_cc(v_cube, 1)
-    if element == 'D"': v_cube = move_d_cc(v_cube, 1)
-    if element == 'U"': v_cube = move_u_cc(v_cube, 1)
-    if element == 'F"': v_cube = move_f_cc(v_cube, 1)
-    if element == 'B"': v_cube = move_b_cc(v_cube, 1)
-    if element == 'M"': v_cube = move_m_cc(v_cube, 1)
-    if element == 'E"': v_cube = move_e_cc(v_cube, 1)
-    if element == 'S"': v_cube = move_s_cc(v_cube, 1)
+    if element == 'R\'': v_cube = move_r_cc(v_cube, 1)
+    if element == 'L\'': v_cube = move_l_cc(v_cube, 1)
+    if element == 'D\'': v_cube = move_d_cc(v_cube, 1)
+    if element == 'U\'': v_cube = move_u_cc(v_cube, 1)
+    if element == 'F\'': v_cube = move_f_cc(v_cube, 1)
+    if element == 'B\'': v_cube = move_b_cc(v_cube, 1)
+    if element == 'M\'': v_cube = move_m_cc(v_cube, 1)
+    if element == 'E\'': v_cube = move_e_cc(v_cube, 1)
+    if element == 'S\'': v_cube = move_s_cc(v_cube, 1)
     if element == 'r': v_cube = move_rr(v_cube, 1)
     if element == 'l': v_cube = move_ll(v_cube, 1)
     if element == 'u': v_cube = move_uu(v_cube, 1)
@@ -429,15 +429,15 @@ def _formula_element(v_cube, element: str) -> str:
     if element == 'x': v_cube = move_xxx(v_cube, 1)
     if element == 'y': v_cube = move_yyy(v_cube, 1)
     if element == 'z': v_cube = move_zzz(v_cube, 1)
-    if element == 'r"': v_cube = move_rr_cc(v_cube, 1)
-    if element == 'l"': v_cube = move_ll_cc(v_cube, 1)
-    if element == 'u"': v_cube = move_uu_cc(v_cube, 1)
-    if element == 'd"': v_cube = move_dd_cc(v_cube, 1)
-    if element == 'f"': v_cube = move_ff_cc(v_cube, 1)
-    if element == 'b"': v_cube = move_bb_cc(v_cube, 1)
-    if element == 'x"': v_cube = move_xxx_cc(v_cube, 1)
-    if element == 'y"': v_cube = move_yyy_cc(v_cube, 1)
-    if element == 'z"': v_cube = move_zzz_cc(v_cube, 1)
+    if element == 'r\'': v_cube = move_rr_cc(v_cube, 1)
+    if element == 'l\'': v_cube = move_ll_cc(v_cube, 1)
+    if element == 'u\'': v_cube = move_uu_cc(v_cube, 1)
+    if element == 'd\'': v_cube = move_dd_cc(v_cube, 1)
+    if element == 'f\'': v_cube = move_ff_cc(v_cube, 1)
+    if element == 'b\'': v_cube = move_bb_cc(v_cube, 1)
+    if element == 'x\'': v_cube = move_xxx_cc(v_cube, 1)
+    if element == 'y\'': v_cube = move_yyy_cc(v_cube, 1)
+    if element == 'z\'': v_cube = move_zzz_cc(v_cube, 1)
     # twice
     if element == 'R2': v_cube = move_r(v_cube, 2)
     if element == 'L2': v_cube = move_l(v_cube, 2)
@@ -448,15 +448,15 @@ def _formula_element(v_cube, element: str) -> str:
     if element == 'M2': v_cube = move_m(v_cube, 2)
     if element == 'E2': v_cube = move_e(v_cube, 2)
     if element == 'S2': v_cube = move_s(v_cube, 2)
-    if element == 'R"2': v_cube = move_r_cc(v_cube, 2)
-    if element == 'L"2': v_cube = move_l_cc(v_cube, 2)
-    if element == 'D"2': v_cube = move_d_cc(v_cube, 2)
-    if element == 'U"2': v_cube = move_u_cc(v_cube, 2)
-    if element == 'F"2': v_cube = move_f_cc(v_cube, 2)
-    if element == 'B"2': v_cube = move_b_cc(v_cube, 2)
-    if element == 'M"2': v_cube = move_m(v_cube, 2)
-    if element == 'E"2': v_cube = move_e(v_cube, 2)
-    if element == 'S"2': v_cube = move_s(v_cube, 2)
+    if element == 'R2\'': v_cube = move_r_cc(v_cube, 2)
+    if element == 'L2\'': v_cube = move_l_cc(v_cube, 2)
+    if element == 'D2\'': v_cube = move_d_cc(v_cube, 2)
+    if element == 'U2\'': v_cube = move_u_cc(v_cube, 2)
+    if element == 'F2\'': v_cube = move_f_cc(v_cube, 2)
+    if element == 'B2\'': v_cube = move_b_cc(v_cube, 2)
+    if element == 'M2\'': v_cube = move_m(v_cube, 2)
+    if element == 'E2\'': v_cube = move_e(v_cube, 2)
+    if element == 'S2\'': v_cube = move_s(v_cube, 2)
     if element == 'r2': v_cube = move_rr(v_cube, 2)
     if element == 'l2': v_cube = move_ll(v_cube, 2)
     if element == 'u2': v_cube = move_uu(v_cube, 2)
@@ -466,15 +466,15 @@ def _formula_element(v_cube, element: str) -> str:
     if element == 'x2': v_cube = move_xxx(v_cube, 2)
     if element == 'y2': v_cube = move_yyy(v_cube, 2)
     if element == 'z2': v_cube = move_zzz(v_cube, 2)
-    if element == 'r"2': v_cube = move_rr_cc(v_cube, 2)
-    if element == 'l"2': v_cube = move_ll_cc(v_cube, 2)
-    if element == 'u"2': v_cube = move_uu_cc(v_cube, 2)
-    if element == 'd"2': v_cube = move_dd_cc(v_cube, 2)
-    if element == 'f"2': v_cube = move_ff_cc(v_cube, 2)
-    if element == 'b"2': v_cube = move_bb_cc(v_cube, 2)
-    if element == 'x"2': v_cube = move_xxx_cc(v_cube, 2)
-    if element == 'y"2': v_cube = move_yyy_cc(v_cube, 2)
-    if element == 'z"2': v_cube = move_zzz_cc(v_cube, 2)
+    if element == 'r2\'': v_cube = move_rr_cc(v_cube, 2)
+    if element == 'l2\'': v_cube = move_ll_cc(v_cube, 2)
+    if element == 'u2\'': v_cube = move_uu_cc(v_cube, 2)
+    if element == 'd2\'': v_cube = move_dd_cc(v_cube, 2)
+    if element == 'f2\'': v_cube = move_ff_cc(v_cube, 2)
+    if element == 'b2\'': v_cube = move_bb_cc(v_cube, 2)
+    if element == 'x2\'': v_cube = move_xxx_cc(v_cube, 2)
+    if element == 'y2\'': v_cube = move_yyy_cc(v_cube, 2)
+    if element == 'z2\'': v_cube = move_zzz_cc(v_cube, 2)
     return v_cube
 
 
