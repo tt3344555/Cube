@@ -94,6 +94,8 @@ def draw_move(v_move: str):
     g_cube = formula(g_cube, v_move)
     draw_cube_faces_update()
 
+def draw_test():
+    v_canvas.yview_scroll(1, 'units')
 
 def draw_main():
     global bfront_window
@@ -113,7 +115,7 @@ def draw_main():
 
     root = Tk()
     root.wm_title('Cube example')
-    v_canvas = Canvas(root, width=30+g_faces_cube_width * 12 + 18 * g_button_width, height=g_faces_cube_width*9 + 30)
+    v_canvas = Canvas(root, width=30+g_faces_cube_width * 12 + 18 * g_button_width, height=g_faces_cube_width * 9 + 30)
     v_canvas.pack()
     bfront = Button(text="F", height=2, width=4, font=('',9), relief=RAISED, command=lambda:draw_move('F'))
     bfront_window = v_canvas.create_window(g_faces_block_offset_x + 12 * g_faces_cube_width + g_button_block_offset_x + 0 * g_button_width, 10 + 0 * g_button_width, anchor=NW, window=bfront)
@@ -248,6 +250,8 @@ def draw_main():
     bttofull_text_window = v_canvas.create_window(g_faces_block_offset_x + 12 * g_faces_cube_width + g_button_block_offset_x, 10 + 7.5 * g_button_block_offset_y + 10 , anchor=NW, window=bttofull_text)
     bttofull_count = Text(height=1, width=5, wrap='none')
     bttofull_count_window = v_canvas.create_window(g_faces_block_offset_x + 24 * g_faces_cube_width + g_button_block_offset_x, 10 + 7.5 * g_button_block_offset_y + 10 , anchor=NW, window=bttofull_count)
+    btest = Button(text="Test", height=1, width=15, relief=RAISED, command=draw_test)
+    btest_window  = v_canvas.create_window(g_faces_block_offset_x + 25 * g_faces_cube_width + g_button_block_offset_x + 10, 10 + 9.5 * g_button_block_offset_y + 10, anchor=NW, window=btest)
     draw_cube_faces(g_cube)
     root.mainloop()
 
