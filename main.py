@@ -114,6 +114,7 @@ def draw_main():
     global bfront_window
     global root
     global v_canvas
+    global v_canvas_2
     global text1
     global bscramble_text
     global bscramble_text_window
@@ -134,8 +135,6 @@ def draw_main():
     s.pack(side=RIGHT, fill=Y)
     v_canvas.configure(yscrollcommand=s.set)
     v_canvas.configure(yscrollincrement='2')
-    # v_canvas_2 = Canvas(root, 30+g_faces_cube_width * 12 + 18 * g_button_width, height=g_faces_cube_width * 9 + 30)
-    # v_canvas.yview('scroll', 'units', 2)
     bfront = Button(text="F", height=2, width=4, font=('',9), relief=RAISED, command=lambda:draw_move('F'))
     bfront_window = v_canvas.create_window(g_faces_block_offset_x + 12 * g_faces_cube_width + g_button_block_offset_x + 0 * g_button_width, 10 + 0 * g_button_width, anchor=NW, window=bfront)
     bright = Button(text="R", height=2, width=4, font=('',9), relief=RAISED, command=lambda:draw_move('R'))
@@ -273,6 +272,9 @@ def draw_main():
     btest_window  = v_canvas.create_window(g_faces_block_offset_x + 25 * g_faces_cube_width + g_button_block_offset_x + 10, 10 + 11.5 * g_button_block_offset_y + 10, anchor=NW, window=btest)
     bturns = Button(text="Turns", height=1, width=15, relief=RAISED, command=draw_turns)
     bturns_window  = v_canvas.create_window(g_faces_block_offset_x + 25 * g_faces_cube_width + g_button_block_offset_x + 10, 10 + 9 * g_button_block_offset_y + 10, anchor=NW, window=bturns)
+    # v_canvas.focus_set()
+    # v_canvas_2 = Canvas(v_canvas, width=30+g_faces_cube_width * 12 + 18 * g_button_width, height=g_faces_cube_width * 9 + 30)
+    # v_canvas_2.pack(side=BOTTOM)
     draw_cube_faces(g_cube)
     root.mainloop()
 
