@@ -46,6 +46,19 @@ def draw_full():
     text1.delete("1.0", "end")
     draw_cube_faces_update()
 
+def draw_turns():
+    global g_cube
+    v_turns = str(bttofull_text.get("0.0", "end"))
+    v_count = str(bttofull_count.get("0.0","end"))
+    v_turns = v_turns[:-1]
+    v_count = v_count[:-1]
+    # showinfo(title='scramble', message=v_turns + ' - ' + v_count)
+    if (v_turns != '') and (v_count != ''):
+        for ind in range(int(v_count)):
+            g_cube = formula(g_cube, v_turns)
+    draw_cube_faces_update()
+
+
 def draw_tofull():
     global g_cube
     v_cube = g_cube
@@ -251,7 +264,9 @@ def draw_main():
     bttofull_count = Text(height=1, width=5, wrap='none')
     bttofull_count_window = v_canvas.create_window(g_faces_block_offset_x + 24 * g_faces_cube_width + g_button_block_offset_x, 10 + 7.5 * g_button_block_offset_y + 10 , anchor=NW, window=bttofull_count)
     btest = Button(text="Test", height=1, width=15, relief=RAISED, command=draw_test)
-    btest_window  = v_canvas.create_window(g_faces_block_offset_x + 25 * g_faces_cube_width + g_button_block_offset_x + 10, 10 + 9.5 * g_button_block_offset_y + 10, anchor=NW, window=btest)
+    btest_window  = v_canvas.create_window(g_faces_block_offset_x + 25 * g_faces_cube_width + g_button_block_offset_x + 10, 10 + 11.5 * g_button_block_offset_y + 10, anchor=NW, window=btest)
+    bturns = Button(text="Turns", height=1, width=15, relief=RAISED, command=draw_turns)
+    bturns_window  = v_canvas.create_window(g_faces_block_offset_x + 25 * g_faces_cube_width + g_button_block_offset_x + 10, 10 + 9 * g_button_block_offset_y + 10, anchor=NW, window=bturns)
     draw_cube_faces(g_cube)
     root.mainloop()
 
