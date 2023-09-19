@@ -293,7 +293,7 @@ if __name__ == '__main__':
     # print(g_faces_cube)
     print('cube scramble')
     # print(ff)
-    # print(v_cube)
+    print(v_cube)
     # show_sides(v_cube)
     # print('cube:  ', end=' '), show_text(v_cube),
     # print('state: ', end=' '), show_text(v_cube_state)
