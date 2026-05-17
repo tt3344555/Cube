@@ -600,3 +600,4 @@ def find_solve_2(v_cube: str, v_formula: str, v_turns: str):
                 v_turns_new_list = v_turns_new.split(' ')
                 v_turns_new_list.__delitem__(v_turns_new_list.index(v_next_move))
                 v_turns_new = _to_str_split(v_turns_new_list)
+

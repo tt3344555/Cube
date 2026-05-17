@@ -42,3 +42,4 @@ F2L = {'F2L_ALGORITM_01': "R U' R' U y' R' U2 R U' U' R' U R",
 # 39 U' R U R' U R U R'
 # 40 R U R'
 # 41 U' R U' R' U R U R'
+
